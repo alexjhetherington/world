@@ -1,0 +1,8 @@
+package improbable.words;
+
+component Message {
+  // Component ID, unique within the project
+  id = 1007;
+
+  string message = 1;
+}

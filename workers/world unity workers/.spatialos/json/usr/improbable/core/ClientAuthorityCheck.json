@@ -1,0 +1,44 @@
+{
+ "sourceReference": {
+  "line": 1,
+  "column": 1
+ },
+ "completePath": "..\\..\\schema\\improbable\\core\\ClientAuthorityCheck.schema",
+ "canonicalName": "improbable/core/ClientAuthorityCheck.schema",
+ "package": "improbable.core",
+ "imports": [],
+ "enumDefinitions": [],
+ "typeDefinitions": [
+  {
+   "sourceReference": {
+    "line": 3,
+    "column": 1
+   },
+   "name": "ClientAuthorityCheckData",
+   "qualifiedName": "improbable.core.ClientAuthorityCheckData",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": []
+  }
+ ],
+ "componentDefinitions": [
+  {
+   "sourceReference": {
+    "line": 3,
+    "column": 1
+   },
+   "name": "ClientAuthorityCheck",
+   "qualifiedName": "improbable.core.ClientAuthorityCheck",
+   "id": 1002,
+   "dataDefinition": {
+    "sourceReference": {
+     "line": 3,
+     "column": 1
+    },
+    "userType": "improbable.core.ClientAuthorityCheckData"
+   },
+   "eventDefinitions": [],
+   "commandDefinitions": []
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+package improbable.core;
+
+component LiveTime {
+  // Component ID, unique within the project
+  id = 1006;
+
+  float timestamp = 1;
+}

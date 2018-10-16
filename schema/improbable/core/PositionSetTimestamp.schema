@@ -1,0 +1,8 @@
+package improbable.core;
+
+component PositionSetTimestamp {
+  // Component ID, unique within the project
+  id = 1005;
+
+  float timestamp = 1;
+}

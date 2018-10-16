@@ -1,0 +1,15 @@
+package improbable.words;
+
+component MessageSpawner {
+  // Component ID, unique within the project
+  id = 1008;
+
+	command MessageSpawnResponse spawn(MessageSpawnRequest);
+}
+
+type MessageSpawnResponse {
+}
+
+type MessageSpawnRequest {
+	string message = 1;
+}

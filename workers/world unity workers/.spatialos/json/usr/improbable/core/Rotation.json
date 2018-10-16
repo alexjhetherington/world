@@ -1,0 +1,60 @@
+{
+ "sourceReference": {
+  "line": 1,
+  "column": 1
+ },
+ "completePath": "..\\..\\schema\\improbable\\core\\Rotation.schema",
+ "canonicalName": "improbable/core/Rotation.schema",
+ "package": "improbable.core",
+ "imports": [],
+ "enumDefinitions": [],
+ "typeDefinitions": [
+  {
+   "sourceReference": {
+    "line": 8,
+    "column": 5
+   },
+   "name": "RotationData",
+   "qualifiedName": "improbable.core.RotationData",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": [
+    {
+     "sourceReference": {
+      "line": 8,
+      "column": 5
+     },
+     "name": "rotation",
+     "number": 2,
+     "singularType": {
+      "sourceReference": {
+       "line": 8,
+       "column": 5
+      },
+      "builtInType": "uint32"
+     }
+    }
+   ]
+  }
+ ],
+ "componentDefinitions": [
+  {
+   "sourceReference": {
+    "line": 3,
+    "column": 1
+   },
+   "name": "Rotation",
+   "qualifiedName": "improbable.core.Rotation",
+   "id": 1004,
+   "dataDefinition": {
+    "sourceReference": {
+     "line": 8,
+     "column": 5
+    },
+    "userType": "improbable.core.RotationData"
+   },
+   "eventDefinitions": [],
+   "commandDefinitions": []
+  }
+ ]
+}

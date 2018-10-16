@@ -1,0 +1,15 @@
+package improbable.character;
+
+component CharacterControls {
+	id = 1000;
+	
+	list<CharacterControlsUpdate> character_controls = 1;
+}
+
+type CharacterControlsUpdate {
+	float vertical_axis = 1;
+	float horizontal_axis = 2;
+	float timestamp = 3;
+	
+	bool spirit_mode = 4;
+}

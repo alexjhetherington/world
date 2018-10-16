@@ -1,0 +1,105 @@
+{
+ "sourceReference": {
+  "line": 1,
+  "column": 1
+ },
+ "completePath": "..\\..\\schema\\improbable\\words\\MessageSpawner.schema",
+ "canonicalName": "improbable/words/MessageSpawner.schema",
+ "package": "improbable.words",
+ "imports": [],
+ "enumDefinitions": [],
+ "typeDefinitions": [
+  {
+   "sourceReference": {
+    "line": 10,
+    "column": 1
+   },
+   "name": "MessageSpawnResponse",
+   "qualifiedName": "improbable.words.MessageSpawnResponse",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": []
+  },
+  {
+   "sourceReference": {
+    "line": 13,
+    "column": 1
+   },
+   "name": "MessageSpawnRequest",
+   "qualifiedName": "improbable.words.MessageSpawnRequest",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": [
+    {
+     "sourceReference": {
+      "line": 14,
+      "column": 2
+     },
+     "name": "message",
+     "number": 1,
+     "singularType": {
+      "sourceReference": {
+       "line": 14,
+       "column": 2
+      },
+      "builtInType": "string"
+     }
+    }
+   ]
+  },
+  {
+   "sourceReference": {
+    "line": 3,
+    "column": 1
+   },
+   "name": "MessageSpawnerData",
+   "qualifiedName": "improbable.words.MessageSpawnerData",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": []
+  }
+ ],
+ "componentDefinitions": [
+  {
+   "sourceReference": {
+    "line": 3,
+    "column": 1
+   },
+   "name": "MessageSpawner",
+   "qualifiedName": "improbable.words.MessageSpawner",
+   "id": 1008,
+   "dataDefinition": {
+    "sourceReference": {
+     "line": 3,
+     "column": 1
+    },
+    "userType": "improbable.words.MessageSpawnerData"
+   },
+   "eventDefinitions": [],
+   "commandDefinitions": [
+    {
+     "sourceReference": {
+      "line": 7,
+      "column": 2
+     },
+     "name": "spawn",
+     "requestType": {
+      "sourceReference": {
+       "line": 7,
+       "column": 37
+      },
+      "userType": "improbable.words.MessageSpawnRequest"
+     },
+     "responseType": {
+      "sourceReference": {
+       "line": 7,
+       "column": 10
+      },
+      "userType": "improbable.words.MessageSpawnResponse"
+     },
+     "commandIndex": 1
+    }
+   ]
+  }
+ ]
+}

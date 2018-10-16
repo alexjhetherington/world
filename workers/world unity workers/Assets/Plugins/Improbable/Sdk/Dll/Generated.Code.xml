@@ -1,0 +1,1652 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Assets/Plugins/Improbable/Sdk/Dll/Generated.Code</name>
+    </assembly>
+    <members>
+        <member name="T:Improbable.EntityAclWriter">
+            <summary>
+            EntityAclWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>EntityAcl.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.EntityAclReader">
+            <summary>
+            EntityAclReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>EntityAcl.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.EntityAcl.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.EntityAcl.Writer.Send(Improbable.EntityAcl.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>EntityAclWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.EntityAcl.Writer.CopyAndSend(Improbable.EntityAcl.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.EntityAcl.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.EntityAcl.Writer.CopyAndSend(Improbable.EntityAcl.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.EntityAcl.Writer.Send(Improbable.EntityAcl.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.EntityAcl.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.EntityAcl.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.EntityAcl.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.EntityAcl.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.EntityAcl.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="P:Improbable.EntityAcl.Reader.ReadAclUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever readAcl field value is changed.
+            </summary>
+        </member>
+        <member name="P:Improbable.EntityAcl.Reader.ComponentWriteAclUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever componentWriteAcl field value is changed.
+            </summary>
+        </member>
+        <member name="T:Improbable.EntityAcl.Updater">
+            <summary>
+            EntityAcl.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use EntityAcl.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.EntityAcl.Data">
+            <summary>
+            Concrete data type for the EntityAcl component.
+            </summary>
+        </member>
+        <member name="T:Improbable.EntityAcl.Update">
+            <summary>
+            Concrete update type for the EntityAcl component.
+            </summary>
+        </member>
+        <member name="F:Improbable.EntityAcl.Update.readAcl">
+            <summary>
+            Field read_acl = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.EntityAcl.Update.componentWriteAcl">
+            <summary>
+            Field component_write_acl = 2.
+            </summary>
+        </member>
+        <member name="T:Improbable.MetadataWriter">
+            <summary>
+            MetadataWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>Metadata.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.MetadataReader">
+            <summary>
+            MetadataReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>Metadata.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Metadata.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Metadata.Writer.Send(Improbable.Metadata.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>MetadataWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Metadata.Writer.CopyAndSend(Improbable.Metadata.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Metadata.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Metadata.Writer.CopyAndSend(Improbable.Metadata.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Metadata.Writer.Send(Improbable.Metadata.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Metadata.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Metadata.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Metadata.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Metadata.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Metadata.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="P:Improbable.Metadata.Reader.EntityTypeUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever entityType field value is changed.
+            </summary>
+        </member>
+        <member name="T:Improbable.Metadata.Updater">
+            <summary>
+            Metadata.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use Metadata.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Metadata.Data">
+            <summary>
+            Concrete data type for the Metadata component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Metadata.Update">
+            <summary>
+            Concrete update type for the Metadata component.
+            </summary>
+        </member>
+        <member name="F:Improbable.Metadata.Update.entityType">
+            <summary>
+            Field entity_type = 1.
+            </summary>
+        </member>
+        <member name="T:Improbable.PersistenceWriter">
+            <summary>
+            PersistenceWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>Persistence.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.PersistenceReader">
+            <summary>
+            PersistenceReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>Persistence.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Persistence.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Persistence.Writer.Send(Improbable.Persistence.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>PersistenceWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Persistence.Writer.CopyAndSend(Improbable.Persistence.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Persistence.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Persistence.Writer.CopyAndSend(Improbable.Persistence.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Persistence.Writer.Send(Improbable.Persistence.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Persistence.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Persistence.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Persistence.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Persistence.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Persistence.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="T:Improbable.Persistence.Updater">
+            <summary>
+            Persistence.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use Persistence.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Persistence.Data">
+            <summary>
+            Concrete data type for the Persistence component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Persistence.Update">
+            <summary>
+            Concrete update type for the Persistence component.
+            </summary>
+        </member>
+        <member name="T:Improbable.PositionWriter">
+            <summary>
+            PositionWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>Position.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.PositionReader">
+            <summary>
+            PositionReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>Position.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Position.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Position.Writer.Send(Improbable.Position.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>PositionWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Position.Writer.CopyAndSend(Improbable.Position.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Position.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Position.Writer.CopyAndSend(Improbable.Position.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Position.Writer.Send(Improbable.Position.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Position.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Position.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Position.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Position.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Position.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="P:Improbable.Position.Reader.CoordsUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever coords field value is changed.
+            </summary>
+        </member>
+        <member name="T:Improbable.Position.Updater">
+            <summary>
+            Position.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use Position.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Position.Data">
+            <summary>
+            Concrete data type for the Position component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Position.Update">
+            <summary>
+            Concrete update type for the Position component.
+            </summary>
+        </member>
+        <member name="F:Improbable.Position.Update.coords">
+            <summary>
+            Field coords = 1.
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CharacterControlsWriter">
+            <summary>
+            CharacterControlsWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>CharacterControls.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CharacterControlsReader">
+            <summary>
+            CharacterControlsReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>CharacterControls.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CharacterControls.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Character.CharacterControls.Writer.Send(Improbable.Character.CharacterControls.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>CharacterControlsWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Character.CharacterControls.Writer.CopyAndSend(Improbable.Character.CharacterControls.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Character.CharacterControls.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Character.CharacterControls.Writer.CopyAndSend(Improbable.Character.CharacterControls.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Character.CharacterControls.Writer.Send(Improbable.Character.CharacterControls.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Character.CharacterControls.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CharacterControls.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CharacterControls.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CharacterControls.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CharacterControls.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CharacterControls.Reader.CharacterControlsUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever characterControls field value is changed.
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CharacterControls.Updater">
+            <summary>
+            CharacterControls.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use CharacterControls.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CharacterControls.Data">
+            <summary>
+            Concrete data type for the CharacterControls component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CharacterControls.Update">
+            <summary>
+            Concrete update type for the CharacterControls component.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.CharacterControls.Update.characterControls">
+            <summary>
+            Field character_controls = 1.
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CollisionsCreatedWriter">
+            <summary>
+            CollisionsCreatedWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>CollisionsCreated.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CollisionsCreatedReader">
+            <summary>
+            CollisionsCreatedReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>CollisionsCreated.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CollisionsCreated.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Character.CollisionsCreated.Writer.Send(Improbable.Character.CollisionsCreated.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>CollisionsCreatedWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Character.CollisionsCreated.Writer.CopyAndSend(Improbable.Character.CollisionsCreated.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Character.CollisionsCreated.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Character.CollisionsCreated.Writer.CopyAndSend(Improbable.Character.CollisionsCreated.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Character.CollisionsCreated.Writer.Send(Improbable.Character.CollisionsCreated.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Character.CollisionsCreated.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CollisionsCreated.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CollisionsCreated.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CollisionsCreated.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CollisionsCreated.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="P:Improbable.Character.CollisionsCreated.Reader.NewCollisionsUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever newCollisions field value is changed.
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CollisionsCreated.Updater">
+            <summary>
+            CollisionsCreated.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use CollisionsCreated.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CollisionsCreated.Data">
+            <summary>
+            Concrete data type for the CollisionsCreated component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CollisionsCreated.Update">
+            <summary>
+            Concrete update type for the CollisionsCreated component.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.CollisionsCreated.Update.newCollisions">
+            <summary>
+            Field new_collisions = 1.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.ClientAuthorityCheckWriter">
+            <summary>
+            ClientAuthorityCheckWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>ClientAuthorityCheck.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.ClientAuthorityCheckReader">
+            <summary>
+            ClientAuthorityCheckReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>ClientAuthorityCheck.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.ClientAuthorityCheck.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Core.ClientAuthorityCheck.Writer.Send(Improbable.Core.ClientAuthorityCheck.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>ClientAuthorityCheckWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Core.ClientAuthorityCheck.Writer.CopyAndSend(Improbable.Core.ClientAuthorityCheck.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Core.ClientAuthorityCheck.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Core.ClientAuthorityCheck.Writer.CopyAndSend(Improbable.Core.ClientAuthorityCheck.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Core.ClientAuthorityCheck.Writer.Send(Improbable.Core.ClientAuthorityCheck.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Core.ClientAuthorityCheck.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.ClientAuthorityCheck.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.ClientAuthorityCheck.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.ClientAuthorityCheck.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.ClientAuthorityCheck.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.ClientAuthorityCheck.Updater">
+            <summary>
+            ClientAuthorityCheck.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use ClientAuthorityCheck.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.ClientAuthorityCheck.Data">
+            <summary>
+            Concrete data type for the ClientAuthorityCheck component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.ClientAuthorityCheck.Update">
+            <summary>
+            Concrete update type for the ClientAuthorityCheck component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.LiveTimeWriter">
+            <summary>
+            LiveTimeWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>LiveTime.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.LiveTimeReader">
+            <summary>
+            LiveTimeReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>LiveTime.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.LiveTime.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Core.LiveTime.Writer.Send(Improbable.Core.LiveTime.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>LiveTimeWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Core.LiveTime.Writer.CopyAndSend(Improbable.Core.LiveTime.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Core.LiveTime.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Core.LiveTime.Writer.CopyAndSend(Improbable.Core.LiveTime.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Core.LiveTime.Writer.Send(Improbable.Core.LiveTime.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Core.LiveTime.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.LiveTime.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.LiveTime.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.LiveTime.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.LiveTime.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.LiveTime.Reader.TimestampUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever timestamp field value is changed.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.LiveTime.Updater">
+            <summary>
+            LiveTime.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use LiveTime.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.LiveTime.Data">
+            <summary>
+            Concrete data type for the LiveTime component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.LiveTime.Update">
+            <summary>
+            Concrete update type for the LiveTime component.
+            </summary>
+        </member>
+        <member name="F:Improbable.Core.LiveTime.Update.timestamp">
+            <summary>
+            Field timestamp = 1.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PlayerCreationWriter">
+            <summary>
+            PlayerCreationWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>PlayerCreation.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PlayerCreationReader">
+            <summary>
+            PlayerCreationReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>PlayerCreation.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PlayerCreation.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Core.PlayerCreation.Writer.Send(Improbable.Core.PlayerCreation.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>PlayerCreationWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Core.PlayerCreation.Writer.CopyAndSend(Improbable.Core.PlayerCreation.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Core.PlayerCreation.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Core.PlayerCreation.Writer.CopyAndSend(Improbable.Core.PlayerCreation.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Core.PlayerCreation.Writer.Send(Improbable.Core.PlayerCreation.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Core.PlayerCreation.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PlayerCreation.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PlayerCreation.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PlayerCreation.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PlayerCreation.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PlayerCreation.Updater">
+            <summary>
+            PlayerCreation.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use PlayerCreation.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PlayerCreation.Commands.CreatePlayer">
+            <summary>
+            Command create_player.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PlayerCreation.Data">
+            <summary>
+            Concrete data type for the PlayerCreation component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PlayerCreation.Update">
+            <summary>
+            Concrete update type for the PlayerCreation component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PositionSetTimestampWriter">
+            <summary>
+            PositionSetTimestampWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>PositionSetTimestamp.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PositionSetTimestampReader">
+            <summary>
+            PositionSetTimestampReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>PositionSetTimestamp.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PositionSetTimestamp.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Core.PositionSetTimestamp.Writer.Send(Improbable.Core.PositionSetTimestamp.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>PositionSetTimestampWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Core.PositionSetTimestamp.Writer.CopyAndSend(Improbable.Core.PositionSetTimestamp.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Core.PositionSetTimestamp.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Core.PositionSetTimestamp.Writer.CopyAndSend(Improbable.Core.PositionSetTimestamp.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Core.PositionSetTimestamp.Writer.Send(Improbable.Core.PositionSetTimestamp.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Core.PositionSetTimestamp.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PositionSetTimestamp.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PositionSetTimestamp.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PositionSetTimestamp.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PositionSetTimestamp.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.PositionSetTimestamp.Reader.TimestampUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever timestamp field value is changed.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PositionSetTimestamp.Updater">
+            <summary>
+            PositionSetTimestamp.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use PositionSetTimestamp.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PositionSetTimestamp.Data">
+            <summary>
+            Concrete data type for the PositionSetTimestamp component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.PositionSetTimestamp.Update">
+            <summary>
+            Concrete update type for the PositionSetTimestamp component.
+            </summary>
+        </member>
+        <member name="F:Improbable.Core.PositionSetTimestamp.Update.timestamp">
+            <summary>
+            Field timestamp = 1.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.RotationWriter">
+            <summary>
+            RotationWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>Rotation.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.RotationReader">
+            <summary>
+            RotationReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>Rotation.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.Rotation.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Core.Rotation.Writer.Send(Improbable.Core.Rotation.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>RotationWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Core.Rotation.Writer.CopyAndSend(Improbable.Core.Rotation.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Core.Rotation.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Core.Rotation.Writer.CopyAndSend(Improbable.Core.Rotation.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Core.Rotation.Writer.Send(Improbable.Core.Rotation.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Core.Rotation.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.Rotation.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.Rotation.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.Rotation.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.Rotation.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="P:Improbable.Core.Rotation.Reader.RotationUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever rotation field value is changed.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.Rotation.Updater">
+            <summary>
+            Rotation.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use Rotation.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.Rotation.Data">
+            <summary>
+            Concrete data type for the Rotation component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Core.Rotation.Update">
+            <summary>
+            Concrete update type for the Rotation component.
+            </summary>
+        </member>
+        <member name="F:Improbable.Core.Rotation.Update.rotation">
+            <summary>
+            Field rotation = 2.
+            </summary>
+        </member>
+        <member name="T:Improbable.Player.ClientConnectionWriter">
+            <summary>
+            ClientConnectionWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>ClientConnection.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Player.ClientConnectionReader">
+            <summary>
+            ClientConnectionReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>ClientConnection.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Player.ClientConnection.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Player.ClientConnection.Writer.Send(Improbable.Player.ClientConnection.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>ClientConnectionWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Player.ClientConnection.Writer.CopyAndSend(Improbable.Player.ClientConnection.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Player.ClientConnection.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Player.ClientConnection.Writer.CopyAndSend(Improbable.Player.ClientConnection.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Player.ClientConnection.Writer.Send(Improbable.Player.ClientConnection.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Player.ClientConnection.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Player.ClientConnection.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Player.ClientConnection.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Player.ClientConnection.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Player.ClientConnection.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="P:Improbable.Player.ClientConnection.Reader.TimeoutBeatsRemainingUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever timeoutBeatsRemaining field value is changed.
+            </summary>
+        </member>
+        <member name="T:Improbable.Player.ClientConnection.Updater">
+            <summary>
+            ClientConnection.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use ClientConnection.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Player.ClientConnection.Commands.Heartbeat">
+            <summary>
+            Command heartbeat.
+            </summary>
+        </member>
+        <member name="T:Improbable.Player.ClientConnection.Commands.DisconnectClient">
+            <summary>
+            Command disconnect_client.
+            </summary>
+        </member>
+        <member name="T:Improbable.Player.ClientConnection.Data">
+            <summary>
+            Concrete data type for the ClientConnection component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Player.ClientConnection.Update">
+            <summary>
+            Concrete update type for the ClientConnection component.
+            </summary>
+        </member>
+        <member name="F:Improbable.Player.ClientConnection.Update.timeoutBeatsRemaining">
+            <summary>
+            Field timeout_beats_remaining = 1.
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.MessageWriter">
+            <summary>
+            MessageWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>Message.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.MessageReader">
+            <summary>
+            MessageReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>Message.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.Message.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Words.Message.Writer.Send(Improbable.Words.Message.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>MessageWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Words.Message.Writer.CopyAndSend(Improbable.Words.Message.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Words.Message.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Words.Message.Writer.CopyAndSend(Improbable.Words.Message.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Words.Message.Writer.Send(Improbable.Words.Message.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Words.Message.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.Message.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.Message.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.Message.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.Message.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.Message.Reader.MessageUpdated">
+            <summary>
+            Register callbacks here to be invoked whenever message field value is changed.
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.Message.Updater">
+            <summary>
+            Message.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use Message.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.Message.Data">
+            <summary>
+            Concrete data type for the Message component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.Message.Update">
+            <summary>
+            Concrete update type for the Message component.
+            </summary>
+        </member>
+        <member name="F:Improbable.Words.Message.Update.message">
+            <summary>
+            Field message = 1.
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.MessageSpawnerWriter">
+            <summary>
+            MessageSpawnerWriter is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>MessageSpawner.Writer</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.MessageSpawnerReader">
+            <summary>
+            MessageSpawnerReader is deprecated and will be removed in a future SpatialOS version. Please migrate to the simplified
+            <c>MessageSpawner.Reader</c> interface (but see its documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.MessageSpawner.Writer.CommandReceiver">
+            <summary>
+            Returns the CommandReceiver for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Words.MessageSpawner.Writer.Send(Improbable.Words.MessageSpawner.Update)">
+            <summary>
+            Sends a component update.
+            </summary>
+            <remarks>
+            Unlike the deprecated <c>MessageSpawnerWriter</c> interface, changes made by the update are not
+            applied to the local copy of the component (returned by the <c>Data</c> property) until the
+            update is processed by the connection. Therefore, the <c>ComponentUpdated</c> event is not
+            triggered immediately, but queued to be triggered at a later time. Additionally, the
+            update will be sent even if it would have no effect on the current local copy of the
+            component data; discarding of no-op updates should be done manually. The behaviour is
+            undefined if the update is mutated after it is sent; use <c>Send(update.DeepCopy())</c> if
+            you intend to hold on to the update and modify it later. <seealso cref="M:Improbable.Words.MessageSpawner.Writer.CopyAndSend(Improbable.Words.MessageSpawner.Update)" /></remarks>
+        </member>
+        <member name="M:Improbable.Words.MessageSpawner.Writer.SendAuthorityLossImminentAcknowledgement">
+            <summary>
+            Sends an authority loss imminent ack for this component.
+            </summary>
+        </member>
+        <member name="M:Improbable.Words.MessageSpawner.Writer.CopyAndSend(Improbable.Words.MessageSpawner.Update)">
+            <summary>
+            Performs a deep copy and sends the copy as a component update.
+            </summary>
+            <remarks>
+            Works exactly like <c>Send(update)</c>, but performs a deep copy of the update before sending
+            it. Use this method if you intend to hold on to the update and modify it later. <see cref="M:Improbable.Words.MessageSpawner.Writer.Send(Improbable.Words.MessageSpawner.Update)" /></remarks>
+        </member>
+        <member name="P:Improbable.Words.MessageSpawner.Reader.HasAuthority">
+            <summary>
+            Whether the local worker currently has authority over this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.MessageSpawner.Reader.Authority">
+            <summary>
+            The authority state of this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.MessageSpawner.Reader.Data">
+            <summary>
+            Retrieves the local copy of the component data.
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.MessageSpawner.Reader.ComponentUpdated">
+            <summary>
+            Triggered whenever an update is received for this component.
+            </summary>
+        </member>
+        <member name="P:Improbable.Words.MessageSpawner.Reader.AuthorityChanged">
+            <summary>
+            Triggered whenever the local worker's authority over this component changes.
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.MessageSpawner.Updater">
+            <summary>
+            MessageSpawner.Updater is deprecated and will be removed in a future SpatialOS version.
+            Please use MessageSpawner.Writer.Send() instead (see the documentation for semantic differences).
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.MessageSpawner.Commands.Spawn">
+            <summary>
+            Command spawn.
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.MessageSpawner.Data">
+            <summary>
+            Concrete data type for the MessageSpawner component.
+            </summary>
+        </member>
+        <member name="T:Improbable.Words.MessageSpawner.Update">
+            <summary>
+            Concrete update type for the MessageSpawner component.
+            </summary>
+        </member>
+        <member name="F:Improbable.Coordinates.x">
+            <summary>
+            Field x = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Coordinates.y">
+            <summary>
+            Field y = 2.
+            </summary>
+        </member>
+        <member name="F:Improbable.Coordinates.z">
+            <summary>
+            Field z = 3.
+            </summary>
+        </member>
+        <member name="F:Improbable.Coordinates.ZERO">
+            <summary>
+            A Coordinates with 0 in each dimension.
+            </summary>
+        </member>
+        <member name="P:Improbable.Coordinates.IsFinite">
+            <summary>
+            True if all components of the Coordinates are real numbers.
+            </summary>
+        </member>
+        <member name="M:Improbable.Coordinates.Lerp(Improbable.Coordinates,Improbable.Coordinates,System.Single)">
+            <summary>
+            Interpolates between to global coordinates
+            </summary>
+            <param name="currentPosition">The starting position</param>
+            <param name="newPosition">The position to intepolate towards</param>
+            <param name="progressRatio">
+            where 0 is the currentPosition and 1 is newPosition. Note: the value is clamped between 0
+            and 1 to prevent extrapolation.
+            </param>
+            <returns>The interpolated position</returns>
+        </member>
+        <member name="M:Improbable.Coordinates.IsWithinDistance(Improbable.Coordinates,System.Double)">
+            <summary>
+            Check if a coordinate is near another.
+            </summary>
+            <param name="other">The coordinate to test.</param>
+            <param name="distance">The allowed range.</param>
+            <returns>True if the other coordinate is within strictly less than the specified range.</returns>
+        </member>
+        <member name="M:Improbable.Coordinates.SquareDistance(Improbable.Coordinates,Improbable.Coordinates)">
+            <summary>
+            Calculate the square-space distance between two coordinates.
+            </summary>
+            <returns>The square-space distance between two coordinates.</returns>
+        </member>
+        <member name="M:Improbable.Coordinates.IsWithinSquareDistance(Improbable.Coordinates,System.Double)">
+            <summary>
+            Check if a coordinate is near another.
+            </summary>
+            <param name="other">The coordinate to test.</param>
+            <param name="sqrDistance">The allowed square-space range.</param>
+            <returns>True if the other coordinate is within strictly less than the specified range.</returns>
+        </member>
+        <member name="M:Improbable.Coordinates.ToUnityVector">
+            <summary>
+            Converts to a Unity Vector3.
+            </summary>
+        </member>
+        <member name="M:Improbable.Coordinates.ToSpatialVector3d">
+            <summary>
+            Converts to a Spatial Vector3d.
+            </summary>
+        </member>
+        <member name="M:Improbable.Coordinates.ToString">
+            <summary>
+            Returns the string representation of the Coordinates.
+            </summary>
+        </member>
+        <member name="F:Improbable.EntityAclData.readAcl">
+            <summary>
+            Field read_acl = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.EntityAclData.componentWriteAcl">
+            <summary>
+            Field component_write_acl = 2.
+            </summary>
+        </member>
+        <member name="F:Improbable.MetadataData.entityType">
+            <summary>
+            Field entity_type = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.PositionData.coords">
+            <summary>
+            Field coords = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Vector3d.x">
+            <summary>
+            Field x = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Vector3d.y">
+            <summary>
+            Field y = 2.
+            </summary>
+        </member>
+        <member name="F:Improbable.Vector3d.z">
+            <summary>
+            Field z = 3.
+            </summary>
+        </member>
+        <member name="F:Improbable.Vector3d.ZERO">
+            <summary>
+            A Vector3d with 0 in each dimension.
+            </summary>
+        </member>
+        <member name="P:Improbable.Vector3d.IsFinite">
+            <summary>
+            True if all components of the Vector3d are real numbers.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3d.SquareMagnitude">
+            <summary>
+            Computes the square of the magnitude of the Vector3d.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3d.Normalized">
+            <summary>
+            Returns the normal of the Vector3d (does not modify the original Vector3f).
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3d.ToUnityVector">
+            <summary>
+            Converts the Vector3d to a Unity Vector3.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3d.ToUnityQuaternion">
+            <summary>
+            Converts the Vector3d to a Unity Quaternion.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3d.ToString">
+            <summary>
+            Returns the string representation of the Vector3d.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3d.op_Multiply(Improbable.Vector3d,System.Double)">
+            <summary>
+            Override of the multiplication opporator. Used for multiplying the Vector3d by a float scalar.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3d.op_Multiply(System.Double,Improbable.Vector3d)">
+            <summary>
+            Override of the multiplication opporator. Used for multiplying the Vector3d by a float scalar.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3d.op_Division(Improbable.Vector3d,System.Double)">
+            <summary>
+            Override of the division opporator. Used for dividing the Vector3d by a float scalar.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3d.op_Addition(Improbable.Vector3d,Improbable.Vector3d)">
+            <summary>
+            Override of the addition opporator. Used for adding two Vector3s.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3d.op_Subtraction(Improbable.Vector3d,Improbable.Vector3d)">
+            <summary>
+            Override of the subtraction opporator. Used for subtracting one Vector3d from another.
+            </summary>
+        </member>
+        <member name="F:Improbable.Vector3f.x">
+            <summary>
+            Field x = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Vector3f.y">
+            <summary>
+            Field y = 2.
+            </summary>
+        </member>
+        <member name="F:Improbable.Vector3f.z">
+            <summary>
+            Field z = 3.
+            </summary>
+        </member>
+        <member name="F:Improbable.Vector3f.ZERO">
+            <summary>
+            A Vector3f with 0f in each dimension.
+            </summary>
+        </member>
+        <member name="P:Improbable.Vector3f.IsFinite">
+            <summary>
+            True if all components of the Vector3f are real numbers.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3f.SquareMagnitude">
+            <summary>
+            Computes the square of the magnitude of the Vector3f.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3f.Normalized">
+            <summary>
+            Returns the normal of the Vector3f (does not modify the original Vector3f).
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3f.ToUnityVector">
+            <summary>
+            Converts the Vector3f to a Unity Vector3.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3f.ToUnityQuaternion">
+            <summary>
+            Converts the Vector3f to a Unity Quaternion.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3f.ToString">
+            <summary>
+            Returns the string representation of the Vector3f.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3f.op_Multiply(Improbable.Vector3f,System.Single)">
+            <summary>
+            Override of the multiplication opporator. Used for multiplying the Vector3f by a float scalar.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3f.op_Multiply(System.Single,Improbable.Vector3f)">
+            <summary>
+            Override of the multiplication opporator. Used for multiplying the Vector3f by a float scalar.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3f.op_Division(Improbable.Vector3f,System.Single)">
+            <summary>
+            Override of the division opporator. Used for dividing the Vector3f by a float scalar.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3f.op_Addition(Improbable.Vector3f,Improbable.Vector3f)">
+            <summary>
+            Override of the addition opporator. Used for adding two Vector3s.
+            </summary>
+        </member>
+        <member name="M:Improbable.Vector3f.op_Subtraction(Improbable.Vector3f,Improbable.Vector3f)">
+            <summary>
+            Override of the subtraction opporator. Used for subtracting one Vector3f from another.
+            </summary>
+        </member>
+        <member name="F:Improbable.WorkerAttributeSet.attribute">
+            <summary>
+            Field attribute = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.WorkerRequirementSet.attributeSet">
+            <summary>
+            Field attribute_set = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.CharacterControlsData.characterControls">
+            <summary>
+            Field character_controls = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.CharacterControlsUpdate.verticalAxis">
+            <summary>
+            Field vertical_axis = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.CharacterControlsUpdate.horizontalAxis">
+            <summary>
+            Field horizontal_axis = 2.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.CharacterControlsUpdate.timestamp">
+            <summary>
+            Field timestamp = 3.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.CharacterControlsUpdate.spiritMode">
+            <summary>
+            Field spirit_mode = 4.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.CollisionsCreatedData.newCollisions">
+            <summary>
+            Field new_collisions = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.NewCollision.entityId">
+            <summary>
+            Field entity_id = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.NewCollision.timestamp">
+            <summary>
+            Field timestamp = 2.
+            </summary>
+        </member>
+        <member name="F:Improbable.Core.LiveTimeData.timestamp">
+            <summary>
+            Field timestamp = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Core.PositionSetTimestampData.timestamp">
+            <summary>
+            Field timestamp = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Core.RotationData.rotation">
+            <summary>
+            Field rotation = 2.
+            </summary>
+        </member>
+        <member name="F:Improbable.Player.ClientConnectionData.timeoutBeatsRemaining">
+            <summary>
+            Field timeout_beats_remaining = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Words.MessageData.message">
+            <summary>
+            Field message = 1.
+            </summary>
+        </member>
+        <member name="F:Improbable.Words.MessageSpawnRequest.message">
+            <summary>
+            Field message = 1.
+            </summary>
+        </member>
+    </members>
+</doc>

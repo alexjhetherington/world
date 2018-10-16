@@ -1,0 +1,104 @@
+{
+ "sourceReference": {
+  "line": 1,
+  "column": 1
+ },
+ "completePath": "..\\..\\schema\\improbable\\character\\CollisionsCreated.schema",
+ "canonicalName": "improbable/character/CollisionsCreated.schema",
+ "package": "improbable.character",
+ "imports": [],
+ "enumDefinitions": [],
+ "typeDefinitions": [
+  {
+   "sourceReference": {
+    "line": 10,
+    "column": 1
+   },
+   "name": "NewCollision",
+   "qualifiedName": "improbable.character.NewCollision",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": [
+    {
+     "sourceReference": {
+      "line": 11,
+      "column": 2
+     },
+     "name": "entity_id",
+     "number": 1,
+     "singularType": {
+      "sourceReference": {
+       "line": 11,
+       "column": 2
+      },
+      "builtInType": "int64"
+     }
+    },
+    {
+     "sourceReference": {
+      "line": 12,
+      "column": 2
+     },
+     "name": "timestamp",
+     "number": 2,
+     "singularType": {
+      "sourceReference": {
+       "line": 12,
+       "column": 2
+      },
+      "builtInType": "float"
+     }
+    }
+   ]
+  },
+  {
+   "sourceReference": {
+    "line": 7,
+    "column": 2
+   },
+   "name": "CollisionsCreatedData",
+   "qualifiedName": "improbable.character.CollisionsCreatedData",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": [
+    {
+     "sourceReference": {
+      "line": 7,
+      "column": 2
+     },
+     "name": "new_collisions",
+     "number": 1,
+     "listType": {
+      "valueType": {
+       "sourceReference": {
+        "line": 7,
+        "column": 7
+       },
+       "userType": "improbable.character.NewCollision"
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "componentDefinitions": [
+  {
+   "sourceReference": {
+    "line": 3,
+    "column": 1
+   },
+   "name": "CollisionsCreated",
+   "qualifiedName": "improbable.character.CollisionsCreated",
+   "id": 1009,
+   "dataDefinition": {
+    "sourceReference": {
+     "line": 7,
+     "column": 2
+    },
+    "userType": "improbable.character.CollisionsCreatedData"
+   },
+   "eventDefinitions": [],
+   "commandDefinitions": []
+  }
+ ]
+}

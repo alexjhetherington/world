@@ -1,0 +1,149 @@
+{
+ "sourceReference": {
+  "line": 1,
+  "column": 1
+ },
+ "completePath": "..\\..\\schema\\improbable\\player\\ClientConnection.schema",
+ "canonicalName": "improbable/player/ClientConnection.schema",
+ "package": "improbable.player",
+ "imports": [],
+ "enumDefinitions": [],
+ "typeDefinitions": [
+  {
+   "sourceReference": {
+    "line": 3,
+    "column": 1
+   },
+   "name": "ClientDisconnectRequest",
+   "qualifiedName": "improbable.player.ClientDisconnectRequest",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": []
+  },
+  {
+   "sourceReference": {
+    "line": 4,
+    "column": 1
+   },
+   "name": "ClientDisconnectResponse",
+   "qualifiedName": "improbable.player.ClientDisconnectResponse",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": []
+  },
+  {
+   "sourceReference": {
+    "line": 6,
+    "column": 1
+   },
+   "name": "HeartbeatRequest",
+   "qualifiedName": "improbable.player.HeartbeatRequest",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": []
+  },
+  {
+   "sourceReference": {
+    "line": 7,
+    "column": 1
+   },
+   "name": "HeartbeatResponse",
+   "qualifiedName": "improbable.player.HeartbeatResponse",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": []
+  },
+  {
+   "sourceReference": {
+    "line": 14,
+    "column": 3
+   },
+   "name": "ClientConnectionData",
+   "qualifiedName": "improbable.player.ClientConnectionData",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": [
+    {
+     "sourceReference": {
+      "line": 14,
+      "column": 3
+     },
+     "name": "timeout_beats_remaining",
+     "number": 1,
+     "singularType": {
+      "sourceReference": {
+       "line": 14,
+       "column": 3
+      },
+      "builtInType": "uint32"
+     }
+    }
+   ]
+  }
+ ],
+ "componentDefinitions": [
+  {
+   "sourceReference": {
+    "line": 9,
+    "column": 1
+   },
+   "name": "ClientConnection",
+   "qualifiedName": "improbable.player.ClientConnection",
+   "id": 1003,
+   "dataDefinition": {
+    "sourceReference": {
+     "line": 14,
+     "column": 3
+    },
+    "userType": "improbable.player.ClientConnectionData"
+   },
+   "eventDefinitions": [],
+   "commandDefinitions": [
+    {
+     "sourceReference": {
+      "line": 16,
+      "column": 3
+     },
+     "name": "heartbeat",
+     "requestType": {
+      "sourceReference": {
+       "line": 16,
+       "column": 39
+      },
+      "userType": "improbable.player.HeartbeatRequest"
+     },
+     "responseType": {
+      "sourceReference": {
+       "line": 16,
+       "column": 11
+      },
+      "userType": "improbable.player.HeartbeatResponse"
+     },
+     "commandIndex": 1
+    },
+    {
+     "sourceReference": {
+      "line": 18,
+      "column": 3
+     },
+     "name": "disconnect_client",
+     "requestType": {
+      "sourceReference": {
+       "line": 18,
+       "column": 54
+      },
+      "userType": "improbable.player.ClientDisconnectRequest"
+     },
+     "responseType": {
+      "sourceReference": {
+       "line": 18,
+       "column": 11
+      },
+      "userType": "improbable.player.ClientDisconnectResponse"
+     },
+     "commandIndex": 2
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,13 @@
+package improbable.character;
+
+component CollisionsCreated{
+	// Component ID, unique within the project
+	id = 1009;
+
+	list<NewCollision> new_collisions = 1;
+}
+
+type NewCollision {
+	int64 entity_id = 1; //entity id is long?
+	float timestamp = 2;
+}
