@@ -5,9 +5,26 @@ component CollisionsCreated{
 	id = 1009;
 
 	list<NewCollision> new_collisions = 1;
+	
+	command ServerCollisionCreatedResponse server_collision_created(ServerCollisionCreatedRequest);
+	command ClientCollisionCreatedResponse client_collision_created(ClientCollisionCreatedRequest);
 }
 
 type NewCollision {
 	int64 entity_id = 1; //entity id is long?
 	float timestamp = 2;
+}
+
+type ServerCollisionCreatedRequest{
+	NewCollision new_collision = 1;
+}
+
+type ServerCollisionCreatedResponse{
+}
+
+type ClientCollisionCreatedRequest{
+	NewCollision new_collision = 1;
+}
+
+type ClientCollisionCreatedResponse{
 }

@@ -125,10 +125,58 @@ public partial class CollisionsCreated : global::Improbable.Entity.Component.ICo
 
   public interface ICommandReceiver
   {
+      global::Improbable.Entity.Component.CommandResponderWrapper<
+        global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated,
+        global::Improbable.Character.ServerCollisionCreatedRequest,
+        global::Improbable.Character.ServerCollisionCreatedResponse>
+          OnServerCollisionCreated { get; set; }
+
+      global::Improbable.Entity.Component.CommandResponderWrapper<
+        global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated,
+        global::Improbable.Character.ClientCollisionCreatedRequest,
+        global::Improbable.Character.ClientCollisionCreatedResponse>
+          OnClientCollisionCreated { get; set; }
+
   }
 
   public partial class Commands
   {
+    public partial class ServerCollisionCreated
+    {
+      public static global::Improbable.Entity.Component.ICommandDescriptor<
+        global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated,
+        global::Improbable.Character.ServerCollisionCreatedRequest,
+        global::Improbable.Character.ServerCollisionCreatedResponse>
+          Descriptor = new global::Improbable.Entity.Component.CommandDescriptor<
+            global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated,
+            global::Improbable.Character.ServerCollisionCreatedRequest,
+            global::Improbable.Character.ServerCollisionCreatedResponse>
+      {
+        TargetComponentId = 1009,
+        CreateRequest = request => new global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated.Request(request),
+        CreateResponse = response => new global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated.Response(response),
+        ExtractRequest = rawRequest => rawRequest.Get().Value,
+        ExtractResponse = rawResponse => rawResponse.Get().Value
+      };
+    }
+    public partial class ClientCollisionCreated
+    {
+      public static global::Improbable.Entity.Component.ICommandDescriptor<
+        global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated,
+        global::Improbable.Character.ClientCollisionCreatedRequest,
+        global::Improbable.Character.ClientCollisionCreatedResponse>
+          Descriptor = new global::Improbable.Entity.Component.CommandDescriptor<
+            global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated,
+            global::Improbable.Character.ClientCollisionCreatedRequest,
+            global::Improbable.Character.ClientCollisionCreatedResponse>
+      {
+        TargetComponentId = 1009,
+        CreateRequest = request => new global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated.Request(request),
+        CreateResponse = response => new global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated.Response(response),
+        ExtractRequest = rawRequest => rawRequest.Get().Value,
+        ExtractResponse = rawResponse => rawResponse.Get().Value
+      };
+    }
 
   }
   // Implementation details below here.
@@ -207,6 +255,36 @@ public partial class CollisionsCreated : global::Improbable.Entity.Component.ICo
         {
           callbacks.OnComponentUpdated(op.EntityId, this, op.Update.Get());
         }
+      }
+    });
+    dispatcher.OnCommandRequest<Commands.ServerCollisionCreated>((op) =>
+    {
+      Impl impl;
+      if (implMap.TryGetValue(op.EntityId, out impl))
+      {
+        impl.CommandReceiverInternal.InvokeServerCollisionCreated(new global::Improbable.Entity.Component.ResponseHandle<
+          Commands.ServerCollisionCreated,
+          global::Improbable.Character.ServerCollisionCreatedRequest,
+          global::Improbable.Character.ServerCollisionCreatedResponse>(
+            connection,
+            op,
+            Commands.ServerCollisionCreated.Descriptor,
+            op.Request.Get().Value));
+      }
+    });
+    dispatcher.OnCommandRequest<Commands.ClientCollisionCreated>((op) =>
+    {
+      Impl impl;
+      if (implMap.TryGetValue(op.EntityId, out impl))
+      {
+        impl.CommandReceiverInternal.InvokeClientCollisionCreated(new global::Improbable.Entity.Component.ResponseHandle<
+          Commands.ClientCollisionCreated,
+          global::Improbable.Character.ClientCollisionCreatedRequest,
+          global::Improbable.Character.ClientCollisionCreatedResponse>(
+            connection,
+            op,
+            Commands.ClientCollisionCreated.Descriptor,
+            op.Request.Get().Value));
       }
     });
   }
@@ -472,6 +550,74 @@ public partial class CollisionsCreated : global::Improbable.Entity.Component.ICo
 
     internal class CommandReceiverImpl : ICommandReceiver
     {
+      public global::Improbable.Entity.Component.CommandResponderWrapper<
+                global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated,
+                global::Improbable.Character.ServerCollisionCreatedRequest,
+                global::Improbable.Character.ServerCollisionCreatedResponse>
+          ServerCollisionCreatedResponderWrapper =
+            new global::Improbable.Entity.Component.CommandResponderWrapper<
+                          global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated,
+                          global::Improbable.Character.ServerCollisionCreatedRequest,
+                          global::Improbable.Character.ServerCollisionCreatedResponse>();
+
+                  public global::Improbable.Entity.Component.CommandResponderWrapper<
+                                global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated,
+                                global::Improbable.Character.ServerCollisionCreatedRequest,
+                                global::Improbable.Character.ServerCollisionCreatedResponse>
+          OnServerCollisionCreated
+      {
+		get
+		{
+		  return ServerCollisionCreatedResponderWrapper;
+		}
+		set
+		{
+		  ServerCollisionCreatedResponderWrapper = value;
+		}
+	  }
+
+      public void InvokeServerCollisionCreated(
+        global::Improbable.Entity.Component.ResponseHandle<
+			global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated,
+			global::Improbable.Character.ServerCollisionCreatedRequest,
+			global::Improbable.Character.ServerCollisionCreatedResponse> responseHandle)
+	  {
+	    ServerCollisionCreatedResponderWrapper.InvokeSendResponse(responseHandle);
+      }
+      public global::Improbable.Entity.Component.CommandResponderWrapper<
+                global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated,
+                global::Improbable.Character.ClientCollisionCreatedRequest,
+                global::Improbable.Character.ClientCollisionCreatedResponse>
+          ClientCollisionCreatedResponderWrapper =
+            new global::Improbable.Entity.Component.CommandResponderWrapper<
+                          global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated,
+                          global::Improbable.Character.ClientCollisionCreatedRequest,
+                          global::Improbable.Character.ClientCollisionCreatedResponse>();
+
+                  public global::Improbable.Entity.Component.CommandResponderWrapper<
+                                global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated,
+                                global::Improbable.Character.ClientCollisionCreatedRequest,
+                                global::Improbable.Character.ClientCollisionCreatedResponse>
+          OnClientCollisionCreated
+      {
+		get
+		{
+		  return ClientCollisionCreatedResponderWrapper;
+		}
+		set
+		{
+		  ClientCollisionCreatedResponderWrapper = value;
+		}
+	  }
+
+      public void InvokeClientCollisionCreated(
+        global::Improbable.Entity.Component.ResponseHandle<
+			global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated,
+			global::Improbable.Character.ClientCollisionCreatedRequest,
+			global::Improbable.Character.ClientCollisionCreatedResponse> responseHandle)
+	  {
+	    ClientCollisionCreatedResponderWrapper.InvokeSendResponse(responseHandle);
+      }
     }
   }
 }

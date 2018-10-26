@@ -14,6 +14,60 @@ namespace Improbable.GeneratedCode
 {
     public static class SpatialOsCommanderExtensions
     {
+        public static void ServerCollisionCreated(this IComponentCommander commander, 
+            EntityId entityId, global::Improbable.Character.ServerCollisionCreatedRequest request, 
+            CommandCallback<global::Improbable.Character.ServerCollisionCreatedResponse> callback,
+            TimeSpan? timeout = null, CommandDelivery commandDelivery = CommandDelivery.RoundTrip)
+        {
+            var rawRequest = new Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated.Request(request);
+            commander.SendCommand<Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated,
+                global::Improbable.Character.ServerCollisionCreatedResponse>(entityId, rawRequest, ExtractResponse_ServerCollisionCreated, callback, timeout, commandDelivery);
+        }
+        
+        public static ICommandResponseHandler<global::Improbable.Character.ServerCollisionCreatedResponse> ServerCollisionCreated(this IComponentCommander commander, 
+            EntityId entityId, global::Improbable.Character.ServerCollisionCreatedRequest request, 
+            TimeSpan? timeout = null, CommandDelivery commandDelivery = CommandDelivery.RoundTrip)
+        {
+            var rawRequest = new Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated.Request(request);
+            var resultHandler = new CommandResponseHandler<global::Improbable.Character.ServerCollisionCreatedResponse>();
+            commander.SendCommand<Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated,
+                global::Improbable.Character.ServerCollisionCreatedResponse>(entityId, rawRequest, ExtractResponse_ServerCollisionCreated, resultHandler.Trigger, timeout, commandDelivery);
+            return resultHandler;
+        }
+
+        private static global::Improbable.Character.ServerCollisionCreatedResponse ExtractResponse_ServerCollisionCreated(
+            ICommandResponse<Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated> rawResponse)
+        {
+            return rawResponse.Get().Value;
+        }
+
+        public static void ClientCollisionCreated(this IComponentCommander commander, 
+            EntityId entityId, global::Improbable.Character.ClientCollisionCreatedRequest request, 
+            CommandCallback<global::Improbable.Character.ClientCollisionCreatedResponse> callback,
+            TimeSpan? timeout = null, CommandDelivery commandDelivery = CommandDelivery.RoundTrip)
+        {
+            var rawRequest = new Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated.Request(request);
+            commander.SendCommand<Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated,
+                global::Improbable.Character.ClientCollisionCreatedResponse>(entityId, rawRequest, ExtractResponse_ClientCollisionCreated, callback, timeout, commandDelivery);
+        }
+        
+        public static ICommandResponseHandler<global::Improbable.Character.ClientCollisionCreatedResponse> ClientCollisionCreated(this IComponentCommander commander, 
+            EntityId entityId, global::Improbable.Character.ClientCollisionCreatedRequest request, 
+            TimeSpan? timeout = null, CommandDelivery commandDelivery = CommandDelivery.RoundTrip)
+        {
+            var rawRequest = new Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated.Request(request);
+            var resultHandler = new CommandResponseHandler<global::Improbable.Character.ClientCollisionCreatedResponse>();
+            commander.SendCommand<Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated,
+                global::Improbable.Character.ClientCollisionCreatedResponse>(entityId, rawRequest, ExtractResponse_ClientCollisionCreated, resultHandler.Trigger, timeout, commandDelivery);
+            return resultHandler;
+        }
+
+        private static global::Improbable.Character.ClientCollisionCreatedResponse ExtractResponse_ClientCollisionCreated(
+            ICommandResponse<Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated> rawResponse)
+        {
+            return rawResponse.Get().Value;
+        }
+
         public static void CreatePlayer(this IComponentCommander commander, 
             EntityId entityId, global::Improbable.Core.CreatePlayerRequest request, 
             CommandCallback<global::Improbable.Core.CreatePlayerResponse> callback,

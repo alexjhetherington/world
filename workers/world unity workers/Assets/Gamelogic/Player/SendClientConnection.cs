@@ -8,6 +8,7 @@ using Improbable.Unity.Visualizer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [WorkerType(WorkerPlatform.UnityClient)]
 public class SendClientConnection : MonoBehaviour {
@@ -19,11 +20,13 @@ public class SendClientConnection : MonoBehaviour {
     private void OnEnable()
     {
         heartbeatCoroutine = StartCoroutine(TimerUtils.CallRepeatedly(SimulationSettings.HeartbeatSendingIntervalSecs, SendHeartbeat));
+        SceneManager.UnloadSceneAsync(BuildSettings.SplashScreenScene);
     }
 
     private void OnDisable()
     {
         StopCoroutine(heartbeatCoroutine);
+        SceneManager.LoadScene(BuildSettings.SplashScreenScene, LoadSceneMode.Additive);
     }
 
     private void SendHeartbeat()

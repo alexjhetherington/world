@@ -47,7 +47,7 @@ public class MoveCalc : MovementCalculation<CharacterInputs> {
             direction = direction.normalized;
 
         Vector2 vector;
-        if (movementInput.spiritMode)
+        if (!movementInput.spiritMode)
         {
             vector = direction* deltaTime * normalSpeed;
         }

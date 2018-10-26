@@ -11,7 +11,7 @@
  "typeDefinitions": [
   {
    "sourceReference": {
-    "line": 10,
+    "line": 13,
     "column": 1
    },
    "name": "NewCollision",
@@ -21,14 +21,14 @@
    "fieldDefinitions": [
     {
      "sourceReference": {
-      "line": 11,
+      "line": 14,
       "column": 2
      },
      "name": "entity_id",
      "number": 1,
      "singularType": {
       "sourceReference": {
-       "line": 11,
+       "line": 14,
        "column": 2
       },
       "builtInType": "int64"
@@ -36,20 +36,96 @@
     },
     {
      "sourceReference": {
-      "line": 12,
+      "line": 15,
       "column": 2
      },
      "name": "timestamp",
      "number": 2,
      "singularType": {
       "sourceReference": {
-       "line": 12,
+       "line": 15,
        "column": 2
       },
       "builtInType": "float"
      }
     }
    ]
+  },
+  {
+   "sourceReference": {
+    "line": 18,
+    "column": 1
+   },
+   "name": "ServerCollisionCreatedRequest",
+   "qualifiedName": "improbable.character.ServerCollisionCreatedRequest",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": [
+    {
+     "sourceReference": {
+      "line": 19,
+      "column": 2
+     },
+     "name": "new_collision",
+     "number": 1,
+     "singularType": {
+      "sourceReference": {
+       "line": 19,
+       "column": 2
+      },
+      "userType": "improbable.character.NewCollision"
+     }
+    }
+   ]
+  },
+  {
+   "sourceReference": {
+    "line": 22,
+    "column": 1
+   },
+   "name": "ServerCollisionCreatedResponse",
+   "qualifiedName": "improbable.character.ServerCollisionCreatedResponse",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": []
+  },
+  {
+   "sourceReference": {
+    "line": 25,
+    "column": 1
+   },
+   "name": "ClientCollisionCreatedRequest",
+   "qualifiedName": "improbable.character.ClientCollisionCreatedRequest",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": [
+    {
+     "sourceReference": {
+      "line": 26,
+      "column": 2
+     },
+     "name": "new_collision",
+     "number": 1,
+     "singularType": {
+      "sourceReference": {
+       "line": 26,
+       "column": 2
+      },
+      "userType": "improbable.character.NewCollision"
+     }
+    }
+   ]
+  },
+  {
+   "sourceReference": {
+    "line": 29,
+    "column": 1
+   },
+   "name": "ClientCollisionCreatedResponse",
+   "qualifiedName": "improbable.character.ClientCollisionCreatedResponse",
+   "enumDefinitions": [],
+   "typeDefinitions": [],
+   "fieldDefinitions": []
   },
   {
    "sourceReference": {
@@ -98,7 +174,52 @@
     "userType": "improbable.character.CollisionsCreatedData"
    },
    "eventDefinitions": [],
-   "commandDefinitions": []
+   "commandDefinitions": [
+    {
+     "sourceReference": {
+      "line": 9,
+      "column": 2
+     },
+     "name": "server_collision_created",
+     "requestType": {
+      "sourceReference": {
+       "line": 9,
+       "column": 66
+      },
+      "userType": "improbable.character.ServerCollisionCreatedRequest"
+     },
+     "responseType": {
+      "sourceReference": {
+       "line": 9,
+       "column": 10
+      },
+      "userType": "improbable.character.ServerCollisionCreatedResponse"
+     },
+     "commandIndex": 1
+    },
+    {
+     "sourceReference": {
+      "line": 10,
+      "column": 2
+     },
+     "name": "client_collision_created",
+     "requestType": {
+      "sourceReference": {
+       "line": 10,
+       "column": 66
+      },
+      "userType": "improbable.character.ClientCollisionCreatedRequest"
+     },
+     "responseType": {
+      "sourceReference": {
+       "line": 10,
+       "column": 10
+      },
+      "userType": "improbable.character.ClientCollisionCreatedResponse"
+     },
+     "commandIndex": 2
+    }
+   ]
   }
  ]
 }

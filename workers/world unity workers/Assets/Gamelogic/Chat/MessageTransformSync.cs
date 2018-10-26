@@ -28,5 +28,12 @@ public class MessageTransformSync : MonoBehaviour {
         {
             stacker.Stack();
         }
+
+        AllMessages.GetInstance().AddMessage(gameObject.GetSpatialOsEntity().EntityId.Id, walls.gameObject);
+    }
+
+    private void OnDisable()
+    {
+        AllMessages.GetInstance().RemoveMessage(gameObject.GetSpatialOsEntity().EntityId.Id);
     }
 }

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/UnityClient.unity
     guid: 114f9b7d2ccb03b46925d57875325f8e
   - enabled: 1
+    path: Assets/Splash.unity
+    guid: 1ccefebb21c6fe84c940bafa3c262329
+  - enabled: 1
     path: Assets/UnityWorker.unity
     guid: 72d5b3962fbb420408ac2a22446808e8
   m_configObjects: {}

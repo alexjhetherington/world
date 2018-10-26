@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4178082689752306}
   - component: {fileID: 114923401488042072}
   - component: {fileID: 114102362165361504}
-  m_Layer: 0
+  - component: {fileID: 114629046870652528}
+  m_Layer: 10
   m_Name: WalledMessageOnGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,6 +294,17 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &114629046870652528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443019513091266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ed958c0e5e10c49a7e6a64a45d1130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114653541178674044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -425,7 +437,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1531762842561440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224509222416656612}

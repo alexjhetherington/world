@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Improbable.Character;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
     protected abstract void SendMovementInputToServer(List<MI> movementInput);
     protected abstract AuthoritativeTransform GetAuthoritativeTransform();
     protected abstract float GetLiveTime();
+
+    protected abstract NewCollision[] GetNewColliders();
 
     protected void Update()
     {
@@ -71,9 +74,11 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
         {
             timestamp += Time.deltaTime;
         }
+    }
 
-
-        
+    public float GetLocalTimestamp()
+    {
+        return timestamp;
     }
 
     private void DebugInputs()
@@ -122,7 +127,6 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
 
     protected void SimulateUntilNow()
     {
-        
         if (simulateFromLast)
         {
             /*Debug.Log("---Simulating from new received Authority Transform---");
@@ -139,7 +143,7 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
 
             Vector3 position = gameObject.transform.position;
             SetAuthoritativePosition();
-            movementCalculation.DoMovement(inputs, authoritativeTransform.timestamp, timestamp);
+            movementCalculation.DoMovement(inputs, GetNewColliders(), authoritativeTransform.timestamp, timestamp);
             simulateFromLast = false;
 
             
@@ -157,6 +161,6 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
         }
 
 
-        movementCalculation.DoMovement(inputs, timestamp, timestamp + Time.deltaTime);
+        movementCalculation.DoMovement(inputs, GetNewColliders(), timestamp, timestamp + Time.deltaTime);
     }
 }

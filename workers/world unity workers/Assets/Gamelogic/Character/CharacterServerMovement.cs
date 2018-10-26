@@ -2,6 +2,7 @@
 using Improbable.Character;
 using Improbable.Core;
 using Improbable.Unity;
+using Improbable.Unity.Core;
 using Improbable.Unity.Visualizer;
 using System;
 using System.Collections;
@@ -15,19 +16,20 @@ public class CharacterServerMovement : ServerMovement<CharacterInputs>
     [Require] private PositionSetTimestamp.Writer timestampWriter;
     [Require] private CharacterControls.Reader characterControlsReader;
     [Require] private LiveTime.Writer liveTimeWriter;
-    
+    [Require] private CollisionsCreated.Writer collisionsCreatedWriter;
+
     private void OnEnable()
     {
         transform.position = positionWriter.Data.coords.ToUnityVector();
         
         characterControlsReader.ComponentUpdated.Add(OnCharacterControlsUpdated);
-
-        Debug.LogWarning("Enabled");
+        Debug.LogWarning("Server Movement Enabled");
     }
     
     private void OnDisable()
     {
         characterControlsReader.ComponentUpdated.Remove(OnCharacterControlsUpdated);
+        Debug.LogWarning("Server Movement Disabled");
     }
 
     private void OnCharacterControlsUpdated(CharacterControls.Update obj)
@@ -48,6 +50,29 @@ public class CharacterServerMovement : ServerMovement<CharacterInputs>
 
         timestampWriter.Send(new PositionSetTimestamp.Update()
             .SetTimestamp(authoritativeTransform.timestamp)
+            );
+
+        RemoveNewCollisions();
+    }
+
+    private void RemoveNewCollisions()
+    {
+        float lastUpdatedTimestamp = timestampWriter.Data.timestamp;
+
+        Improbable.Collections.List<NewCollision> existingNewCollisions = collisionsCreatedWriter.Data.newCollisions.DeepCopy();
+        Improbable.Collections.List<NewCollision> newCollisions = new Improbable.Collections.List<NewCollision>(0);
+        foreach(NewCollision nc in existingNewCollisions)
+        {
+            //If last updated timestamp is after the new collision timestamp, we don't need to worry about the new collision anymore
+            //we can assume it has always existed
+            if (nc.timestamp > lastUpdatedTimestamp)
+            {
+                newCollisions.Add(nc);
+            }
+        }
+
+        collisionsCreatedWriter.Send(
+            new CollisionsCreated.Update().SetNewCollisions(newCollisions)
             );
     }
 
@@ -92,6 +117,12 @@ public class CharacterServerMovement : ServerMovement<CharacterInputs>
         liveTimeWriter.Send(new LiveTime.Update()
             .SetTimestamp(liveTime)
             );
+    }
+
+    protected override NewCollision[] GetNewColliders()
+    {
+        List<NewCollision> newCollisions = collisionsCreatedWriter.Data.newCollisions;
+        return newCollisions.ToArray();
     }
 }
 

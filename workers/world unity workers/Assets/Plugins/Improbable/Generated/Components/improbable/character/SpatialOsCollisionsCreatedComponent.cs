@@ -31,6 +31,10 @@ namespace Improbable.Character
                 return false;
             }
 
+            DispatcherCallbackKeys.Add(
+                communicator.RegisterCommandRequest<global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated>(OnServerCollisionCreatedCommandRequestDispatcherCallback));
+            DispatcherCallbackKeys.Add(
+                communicator.RegisterCommandRequest<global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated>(OnClientCollisionCreatedCommandRequestDispatcherCallback));
             return true;
         }
 
@@ -206,6 +210,316 @@ namespace Improbable.Character
                     onNewCollisionsUpdateCallbacks.Remove(value);
                 }
             }
+        }
+
+
+        private ServerCollisionCreatedCommandRequestCallbackWrapper serverCollisionCreatedCommandRequestCallbackWrapper;
+
+        /// <summary>
+        ///     Invoked when a 'ServerCollisionCreated' request is received.
+        /// </summary>
+        public ServerCollisionCreatedCommandRequestCallbackWrapper OnServerCollisionCreatedCommandRequest
+        {
+            get
+            {
+                if (serverCollisionCreatedCommandRequestCallbackWrapper == null)
+                {
+                    serverCollisionCreatedCommandRequestCallbackWrapper = new ServerCollisionCreatedCommandRequestCallbackWrapper();
+                }
+                return serverCollisionCreatedCommandRequestCallbackWrapper;
+            }
+            set { serverCollisionCreatedCommandRequestCallbackWrapper = value; }
+        }
+        /// <summary>
+        ///     The type of callback to pass to listen for incoming 'ServerCollisionCreated' command requests and respond asynchronously.
+        /// </summary>
+        public delegate void OnServerCollisionCreatedCommandRequestAsyncCallback(ServerCollisionCreatedCommandResponseHandle responseHandle);
+        /// <summary>
+        ///     The type of callback to pass to listen for incoming 'ServerCollisionCreated' command requests and respond synchronously.
+        /// </summary>
+        public delegate global::Improbable.Character.ServerCollisionCreatedResponse OnServerCollisionCreatedCommandRequestSyncCallback(global::Improbable.Character.ServerCollisionCreatedRequest request, ICommandCallerInfo commandCallerInfo);
+        /// <summary>
+        ///     Wraps a synchronous or asynchronous callback to be invoked when a command response is received for the ServerCollisionCreated command.
+        /// </summary>
+        public class ServerCollisionCreatedCommandRequestCallbackWrapper
+        {
+            private OnServerCollisionCreatedCommandRequestSyncCallback syncCallback;
+            private OnServerCollisionCreatedCommandRequestAsyncCallback asyncCallback;
+            /// <summary>
+            ///     Registers a synchronous callback to be invoked immediately upon receiving a command request.
+            /// </summary>
+            public void RegisterResponse(OnServerCollisionCreatedCommandRequestSyncCallback callback)
+            {
+                if (IsCallbackRegistered())
+                {
+                    ThrowCallbackAlreadyRegisteredException();
+                }
+                syncCallback = callback;
+            }
+            /// <summary>
+            ///     Registers an asynchronous callback to be invoked with a response handle upon receiving a command request.
+            /// </summary>
+            public void RegisterAsyncResponse(OnServerCollisionCreatedCommandRequestAsyncCallback callback)
+            {
+                if (IsCallbackRegistered())
+                {
+                    ThrowCallbackAlreadyRegisteredException();
+                }
+                asyncCallback = callback;
+            }
+            /// <summary>
+            ///     Deregisters a previously registered command response.
+            /// </summary>
+            public void DeregisterResponse()
+            {
+                if (!IsCallbackRegistered())
+                {
+                    throw new InvalidOperationException("Attempted to deregister a command response when none is registered for command ServerCollisionCreated");
+                }
+                syncCallback = null;
+                asyncCallback = null;
+            }
+            /// <summary>
+            ///     Returns whether or not a callback is currently registered.
+            /// </summary>
+            public bool IsCallbackRegistered()
+            {
+                return syncCallback != null || asyncCallback != null;
+            }
+            private void ThrowCallbackAlreadyRegisteredException()
+            {
+                throw new InvalidOperationException("Attempted to register a command response when one has already been registered for command ServerCollisionCreated.");
+            }
+            /// <summary>
+            ///     Invokes the registered callback. This is an implementation detail; it should not be called from user code.
+            /// </summary>
+            public void InvokeCallback(ServerCollisionCreatedCommandResponseHandle responseHandle)
+            {
+                if (syncCallback != null)
+                {
+                    responseHandle.Respond(syncCallback(responseHandle.Request, responseHandle.CallerInfo));
+                }
+                if (asyncCallback != null)
+                {
+                    asyncCallback(responseHandle);
+                }
+            }
+        }
+
+        /// <summary>
+        ///     A response handle for the 'ServerCollisionCreated' command.
+        /// </summary>
+        public class ServerCollisionCreatedCommandResponseHandle
+        {
+            private readonly
+                global::Improbable.Worker.CommandRequestOp<global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated>
+                commandRequestOp;
+            private readonly CommandCallerInfo commandCallerInfo;
+            private readonly ISpatialCommunicator communicator;
+
+            /// <summary>
+            ///     Creates a new response handle. This is an implementation detail; it should not be called from user code.
+            /// </summary>
+            public ServerCollisionCreatedCommandResponseHandle(
+                global::Improbable.Worker.CommandRequestOp<global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated>
+                    commandRequestOp, ISpatialCommunicator communicator)
+            {
+                this.commandRequestOp = commandRequestOp;
+                this.commandCallerInfo = new CommandCallerInfo(commandRequestOp.CallerWorkerId, commandRequestOp.CallerAttributeSet);
+                this.communicator = communicator;
+            }
+
+            /// <summary>
+            ///     Returns the request object.
+            /// </summary>
+            public global::Improbable.Character.ServerCollisionCreatedRequest Request { get { return commandRequestOp.Request.Get().Value; } }
+
+            /// <summary>
+            /// Metadata for this command request.
+            /// </summary>
+            public ICommandCallerInfo CallerInfo
+            {
+                get { return commandCallerInfo; }
+            }
+
+            /// <summary>
+            ///     Sends the command response.
+            /// </summary>
+            public void Respond(global::Improbable.Character.ServerCollisionCreatedResponse response)
+            {
+                var commandResponse = new global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated.Response(response);
+                communicator.SendCommandResponse(commandRequestOp.RequestId, commandResponse);
+            }
+        }
+
+        protected void OnServerCollisionCreatedCommandRequestDispatcherCallback(
+            global::Improbable.Worker.CommandRequestOp<global::Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated> op)
+        {
+            if (op.EntityId != entityId || serverCollisionCreatedCommandRequestCallbackWrapper == null || !serverCollisionCreatedCommandRequestCallbackWrapper.IsCallbackRegistered())
+            {
+                return;
+            }
+            var responseHandle = new ServerCollisionCreatedCommandResponseHandle(op, communicator);
+            serverCollisionCreatedCommandRequestCallbackWrapper.InvokeCallback(responseHandle);
+
+#if UNITY_EDITOR
+            LogCommandRequest(DateTime.Now, "ServerCollisionCreated", op.Request.Get().Value);
+#endif
+        }
+
+
+        private ClientCollisionCreatedCommandRequestCallbackWrapper clientCollisionCreatedCommandRequestCallbackWrapper;
+
+        /// <summary>
+        ///     Invoked when a 'ClientCollisionCreated' request is received.
+        /// </summary>
+        public ClientCollisionCreatedCommandRequestCallbackWrapper OnClientCollisionCreatedCommandRequest
+        {
+            get
+            {
+                if (clientCollisionCreatedCommandRequestCallbackWrapper == null)
+                {
+                    clientCollisionCreatedCommandRequestCallbackWrapper = new ClientCollisionCreatedCommandRequestCallbackWrapper();
+                }
+                return clientCollisionCreatedCommandRequestCallbackWrapper;
+            }
+            set { clientCollisionCreatedCommandRequestCallbackWrapper = value; }
+        }
+        /// <summary>
+        ///     The type of callback to pass to listen for incoming 'ClientCollisionCreated' command requests and respond asynchronously.
+        /// </summary>
+        public delegate void OnClientCollisionCreatedCommandRequestAsyncCallback(ClientCollisionCreatedCommandResponseHandle responseHandle);
+        /// <summary>
+        ///     The type of callback to pass to listen for incoming 'ClientCollisionCreated' command requests and respond synchronously.
+        /// </summary>
+        public delegate global::Improbable.Character.ClientCollisionCreatedResponse OnClientCollisionCreatedCommandRequestSyncCallback(global::Improbable.Character.ClientCollisionCreatedRequest request, ICommandCallerInfo commandCallerInfo);
+        /// <summary>
+        ///     Wraps a synchronous or asynchronous callback to be invoked when a command response is received for the ClientCollisionCreated command.
+        /// </summary>
+        public class ClientCollisionCreatedCommandRequestCallbackWrapper
+        {
+            private OnClientCollisionCreatedCommandRequestSyncCallback syncCallback;
+            private OnClientCollisionCreatedCommandRequestAsyncCallback asyncCallback;
+            /// <summary>
+            ///     Registers a synchronous callback to be invoked immediately upon receiving a command request.
+            /// </summary>
+            public void RegisterResponse(OnClientCollisionCreatedCommandRequestSyncCallback callback)
+            {
+                if (IsCallbackRegistered())
+                {
+                    ThrowCallbackAlreadyRegisteredException();
+                }
+                syncCallback = callback;
+            }
+            /// <summary>
+            ///     Registers an asynchronous callback to be invoked with a response handle upon receiving a command request.
+            /// </summary>
+            public void RegisterAsyncResponse(OnClientCollisionCreatedCommandRequestAsyncCallback callback)
+            {
+                if (IsCallbackRegistered())
+                {
+                    ThrowCallbackAlreadyRegisteredException();
+                }
+                asyncCallback = callback;
+            }
+            /// <summary>
+            ///     Deregisters a previously registered command response.
+            /// </summary>
+            public void DeregisterResponse()
+            {
+                if (!IsCallbackRegistered())
+                {
+                    throw new InvalidOperationException("Attempted to deregister a command response when none is registered for command ClientCollisionCreated");
+                }
+                syncCallback = null;
+                asyncCallback = null;
+            }
+            /// <summary>
+            ///     Returns whether or not a callback is currently registered.
+            /// </summary>
+            public bool IsCallbackRegistered()
+            {
+                return syncCallback != null || asyncCallback != null;
+            }
+            private void ThrowCallbackAlreadyRegisteredException()
+            {
+                throw new InvalidOperationException("Attempted to register a command response when one has already been registered for command ClientCollisionCreated.");
+            }
+            /// <summary>
+            ///     Invokes the registered callback. This is an implementation detail; it should not be called from user code.
+            /// </summary>
+            public void InvokeCallback(ClientCollisionCreatedCommandResponseHandle responseHandle)
+            {
+                if (syncCallback != null)
+                {
+                    responseHandle.Respond(syncCallback(responseHandle.Request, responseHandle.CallerInfo));
+                }
+                if (asyncCallback != null)
+                {
+                    asyncCallback(responseHandle);
+                }
+            }
+        }
+
+        /// <summary>
+        ///     A response handle for the 'ClientCollisionCreated' command.
+        /// </summary>
+        public class ClientCollisionCreatedCommandResponseHandle
+        {
+            private readonly
+                global::Improbable.Worker.CommandRequestOp<global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated>
+                commandRequestOp;
+            private readonly CommandCallerInfo commandCallerInfo;
+            private readonly ISpatialCommunicator communicator;
+
+            /// <summary>
+            ///     Creates a new response handle. This is an implementation detail; it should not be called from user code.
+            /// </summary>
+            public ClientCollisionCreatedCommandResponseHandle(
+                global::Improbable.Worker.CommandRequestOp<global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated>
+                    commandRequestOp, ISpatialCommunicator communicator)
+            {
+                this.commandRequestOp = commandRequestOp;
+                this.commandCallerInfo = new CommandCallerInfo(commandRequestOp.CallerWorkerId, commandRequestOp.CallerAttributeSet);
+                this.communicator = communicator;
+            }
+
+            /// <summary>
+            ///     Returns the request object.
+            /// </summary>
+            public global::Improbable.Character.ClientCollisionCreatedRequest Request { get { return commandRequestOp.Request.Get().Value; } }
+
+            /// <summary>
+            /// Metadata for this command request.
+            /// </summary>
+            public ICommandCallerInfo CallerInfo
+            {
+                get { return commandCallerInfo; }
+            }
+
+            /// <summary>
+            ///     Sends the command response.
+            /// </summary>
+            public void Respond(global::Improbable.Character.ClientCollisionCreatedResponse response)
+            {
+                var commandResponse = new global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated.Response(response);
+                communicator.SendCommandResponse(commandRequestOp.RequestId, commandResponse);
+            }
+        }
+
+        protected void OnClientCollisionCreatedCommandRequestDispatcherCallback(
+            global::Improbable.Worker.CommandRequestOp<global::Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated> op)
+        {
+            if (op.EntityId != entityId || clientCollisionCreatedCommandRequestCallbackWrapper == null || !clientCollisionCreatedCommandRequestCallbackWrapper.IsCallbackRegistered())
+            {
+                return;
+            }
+            var responseHandle = new ClientCollisionCreatedCommandResponseHandle(op, communicator);
+            clientCollisionCreatedCommandRequestCallbackWrapper.InvokeCallback(responseHandle);
+
+#if UNITY_EDITOR
+            LogCommandRequest(DateTime.Now, "ClientCollisionCreated", op.Request.Get().Value);
+#endif
         }
 
     }

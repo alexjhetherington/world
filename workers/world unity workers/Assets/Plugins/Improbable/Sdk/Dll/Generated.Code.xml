@@ -559,6 +559,16 @@
             Please use CollisionsCreated.Writer.Send() instead (see the documentation for semantic differences).
             </summary>
         </member>
+        <member name="T:Improbable.Character.CollisionsCreated.Commands.ServerCollisionCreated">
+            <summary>
+            Command server_collision_created.
+            </summary>
+        </member>
+        <member name="T:Improbable.Character.CollisionsCreated.Commands.ClientCollisionCreated">
+            <summary>
+            Command client_collision_created.
+            </summary>
+        </member>
         <member name="T:Improbable.Character.CollisionsCreated.Data">
             <summary>
             Concrete data type for the CollisionsCreated component.
@@ -1603,6 +1613,11 @@
             Field spirit_mode = 4.
             </summary>
         </member>
+        <member name="F:Improbable.Character.ClientCollisionCreatedRequest.newCollision">
+            <summary>
+            Field new_collision = 1.
+            </summary>
+        </member>
         <member name="F:Improbable.Character.CollisionsCreatedData.newCollisions">
             <summary>
             Field new_collisions = 1.
@@ -1616,6 +1631,11 @@
         <member name="F:Improbable.Character.NewCollision.timestamp">
             <summary>
             Field timestamp = 2.
+            </summary>
+        </member>
+        <member name="F:Improbable.Character.ServerCollisionCreatedRequest.newCollision">
+            <summary>
+            Field new_collision = 1.
             </summary>
         </member>
         <member name="F:Improbable.Core.LiveTimeData.timestamp">

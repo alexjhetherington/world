@@ -1,4 +1,5 @@
-﻿using Improbable.Unity;
+﻿using Improbable.Character;
+using Improbable.Unity;
 using Improbable.Unity.Visualizer;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,8 @@ public abstract class ServerMovement<MI> : MonoBehaviour where MI : MovementInpu
     protected abstract AuthoritativeTransform GetLastPublishedTransform();
     protected abstract float GetLiveTime();
     protected abstract void PublishLiveTime(float liveTime);
-    
+
+    protected abstract NewCollision[] GetNewColliders();
 
     // Update is called once per frame
     // The order of stuff happening here is very important and finnicky
@@ -42,7 +44,7 @@ public abstract class ServerMovement<MI> : MonoBehaviour where MI : MovementInpu
 
         MI mostRecent = movementInput[movementInput.Count - 1];
         float simToTime = Mathf.Min(mostRecent.timestamp, GetLiveTime());
-        movementCalculation.DoMovement(movementInput, lastPublishedTransform.timestamp, simToTime);
+        movementCalculation.DoMovement(movementInput, GetNewColliders(), lastPublishedTransform.timestamp, simToTime);
 
         AuthoritativeTransform toPublish = GetAuthoritativeTransform(simToTime);
         PublishAuthoritativeTransform(toPublish);

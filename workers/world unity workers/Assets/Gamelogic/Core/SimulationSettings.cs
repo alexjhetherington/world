@@ -21,5 +21,7 @@ namespace Assets.Gamelogic.Core
         public static readonly uint TotalHeartbeatsBeforeTimeout = 10;
         public static readonly float HeartbeatCheckIntervalSecs = 5;
         public static readonly float HeartbeatSendingIntervalSecs = 5;
+
+        public static readonly float ClientConnectionTimeoutSecs = 10;
     }
 }

@@ -15,6 +15,8 @@ public class OtherCharacterClientMovement : OtherClientMovement<CharacterInputs>
     [Require] private Position.Reader positionReader;
     [Require] private PositionSetTimestamp.Reader timestampReader;
 
+    [Require] private CollisionsCreated.Reader collisionsCreatedReader;
+
     private void Awake()
     {
         movementCalculation = new MoveCalc(GetComponent<CharacterController>());
@@ -97,5 +99,9 @@ public class OtherCharacterClientMovement : OtherClientMovement<CharacterInputs>
         return at;
     }
 
-
+    protected override NewCollision[] GetNewColliders()
+    {
+        List<NewCollision> newCollisions = collisionsCreatedReader.Data.newCollisions;
+        return newCollisions.ToArray();
+    }
 }

@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 486588786}
   - component: {fileID: 486588785}
   - component: {fileID: 486588789}
+  - component: {fileID: 486588790}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -478,6 +479,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 958965307}
+--- !u!114 &486588790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 486588784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6768cd44baa825341b633417073b6c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &958965305
 GameObject:
   m_ObjectHideFlags: 0

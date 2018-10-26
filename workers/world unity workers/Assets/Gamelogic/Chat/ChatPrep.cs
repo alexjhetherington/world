@@ -24,6 +24,9 @@ public class ChatPrep : MonoBehaviour {
      void OnDestroy()
     {
         MessageKit<string>.removeObserver(MessageKitIds.SEND_CHAT, SendSpawnEvent);
+
+        isTyping = false;
+        MessageKit<bool>.post(MessageKitIds.TYPING_STATE, isTyping);
     }
 
     void Update () {

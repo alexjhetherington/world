@@ -15,6 +15,26 @@ public static class CollisionsCreated_Extensions
   {
     return (CollisionsCreated.Update) update;
   }
+
+  public static CollisionsCreated.Commands.ServerCollisionCreated.Request Get(this global::Improbable.Worker.ICommandRequest<CollisionsCreated.Commands.ServerCollisionCreated> request)
+  {
+    return (CollisionsCreated.Commands.ServerCollisionCreated.Request) request;
+  }
+
+  public static CollisionsCreated.Commands.ServerCollisionCreated.Response Get(this global::Improbable.Worker.ICommandResponse<CollisionsCreated.Commands.ServerCollisionCreated> response)
+  {
+    return (CollisionsCreated.Commands.ServerCollisionCreated.Response) response;
+  }
+
+  public static CollisionsCreated.Commands.ClientCollisionCreated.Request Get(this global::Improbable.Worker.ICommandRequest<CollisionsCreated.Commands.ClientCollisionCreated> request)
+  {
+    return (CollisionsCreated.Commands.ClientCollisionCreated.Request) request;
+  }
+
+  public static CollisionsCreated.Commands.ClientCollisionCreated.Response Get(this global::Improbable.Worker.ICommandResponse<CollisionsCreated.Commands.ClientCollisionCreated> response)
+  {
+    return (CollisionsCreated.Commands.ClientCollisionCreated.Response) response;
+  }
 }
 
 public partial class CollisionsCreated : global::Improbable.Worker.IComponentMetaclass
@@ -104,6 +124,122 @@ public partial class CollisionsCreated : global::Improbable.Worker.IComponentMet
 
   public partial class Commands
   {
+    /// <summary>
+    /// Command server_collision_created.
+    /// </summary>
+    public partial class ServerCollisionCreated : global::Improbable.Worker.ICommandMetaclass
+    {
+      public uint ComponentId { get { return 1009; } }
+      public uint CommandId { get { return 1; } }
+
+      public class Request : global::Improbable.Worker.ICommandRequest<ServerCollisionCreated>, global::Improbable.Collections.IDeepCopyable<Request>
+      {
+        public global::Improbable.Character.ServerCollisionCreatedRequest Value;
+
+        public Request(global::Improbable.Character.ServerCollisionCreatedRequest value)
+        {
+          Value = value;
+        }
+
+        public Request(global::Improbable.Character.NewCollision newCollision)
+        {
+          Value = new global::Improbable.Character.ServerCollisionCreatedRequest(newCollision);
+        }
+
+        public Request DeepCopy()
+        {
+          return new Request(Value.DeepCopy());
+        }
+
+        public global::Improbable.Worker.Internal.GenericCommandObject ToGenericObject()
+        {
+          return new global::Improbable.Worker.Internal.GenericCommandObject(1, this);
+        }
+      }
+
+      public class Response : global::Improbable.Worker.ICommandResponse<ServerCollisionCreated>, global::Improbable.Collections.IDeepCopyable<Response>
+      {
+        public global::Improbable.Character.ServerCollisionCreatedResponse Value;
+
+        public Response(global::Improbable.Character.ServerCollisionCreatedResponse value)
+        {
+          Value = value;
+        }
+
+        public Response()
+        {
+          Value = new global::Improbable.Character.ServerCollisionCreatedResponse();
+        }
+
+        public Response DeepCopy()
+        {
+          return new Response(Value.DeepCopy());
+        }
+
+        public global::Improbable.Worker.Internal.GenericCommandObject ToGenericObject()
+        {
+          return new global::Improbable.Worker.Internal.GenericCommandObject(1, this);
+        }
+      }
+    }
+    /// <summary>
+    /// Command client_collision_created.
+    /// </summary>
+    public partial class ClientCollisionCreated : global::Improbable.Worker.ICommandMetaclass
+    {
+      public uint ComponentId { get { return 1009; } }
+      public uint CommandId { get { return 2; } }
+
+      public class Request : global::Improbable.Worker.ICommandRequest<ClientCollisionCreated>, global::Improbable.Collections.IDeepCopyable<Request>
+      {
+        public global::Improbable.Character.ClientCollisionCreatedRequest Value;
+
+        public Request(global::Improbable.Character.ClientCollisionCreatedRequest value)
+        {
+          Value = value;
+        }
+
+        public Request(global::Improbable.Character.NewCollision newCollision)
+        {
+          Value = new global::Improbable.Character.ClientCollisionCreatedRequest(newCollision);
+        }
+
+        public Request DeepCopy()
+        {
+          return new Request(Value.DeepCopy());
+        }
+
+        public global::Improbable.Worker.Internal.GenericCommandObject ToGenericObject()
+        {
+          return new global::Improbable.Worker.Internal.GenericCommandObject(2, this);
+        }
+      }
+
+      public class Response : global::Improbable.Worker.ICommandResponse<ClientCollisionCreated>, global::Improbable.Collections.IDeepCopyable<Response>
+      {
+        public global::Improbable.Character.ClientCollisionCreatedResponse Value;
+
+        public Response(global::Improbable.Character.ClientCollisionCreatedResponse value)
+        {
+          Value = value;
+        }
+
+        public Response()
+        {
+          Value = new global::Improbable.Character.ClientCollisionCreatedResponse();
+        }
+
+        public Response DeepCopy()
+        {
+          return new Response(Value.DeepCopy());
+        }
+
+        public global::Improbable.Worker.Internal.GenericCommandObject ToGenericObject()
+        {
+          return new global::Improbable.Worker.Internal.GenericCommandObject(2, this);
+        }
+      }
+    }
   }
 
   // Implementation details below here.
@@ -183,12 +319,34 @@ public partial class CollisionsCreated : global::Improbable.Worker.IComponentMet
       {
         var data = new global::Improbable.Worker.Internal.GenericCommandObject();
         **handleOut = global::Improbable.Worker.Internal.ClientHandles.Instance.CreateHandle(data);
+        var commandObject = global::Improbable.Worker.Internal.Pbio.GetObject(root, 1009);
+        if (global::Improbable.Worker.Internal.Pbio.GetObjectCount(commandObject, 1) != 0) {
+          data.CommandId = 1;
+          data.CommandObject = new Commands.ServerCollisionCreated.Request(global::Improbable.Character.ServerCollisionCreatedRequest_Internal.Read(global::Improbable.Worker.Internal.Pbio.GetObject(commandObject, 1)));
+          return 1;
+        }
+        if (global::Improbable.Worker.Internal.Pbio.GetObjectCount(commandObject, 3) != 0) {
+          data.CommandId = 2;
+          data.CommandObject = new Commands.ClientCollisionCreated.Request(global::Improbable.Character.ClientCollisionCreatedRequest_Internal.Read(global::Improbable.Worker.Internal.Pbio.GetObject(commandObject, 3)));
+          return 1;
+        }
         return 0;
       }
       else if (handleType == (byte) global::Improbable.Worker.Internal.ComponentProtocol.ClientHandleType.Response)
       {
         var data = new global::Improbable.Worker.Internal.GenericCommandObject();
         **handleOut = global::Improbable.Worker.Internal.ClientHandles.Instance.CreateHandle(data);
+        var commandObject = global::Improbable.Worker.Internal.Pbio.GetObject(root, 1009);
+        if (global::Improbable.Worker.Internal.Pbio.GetObjectCount(commandObject, 2) != 0) {
+          data.CommandId = 1;
+          data.CommandObject = new Commands.ServerCollisionCreated.Response(global::Improbable.Character.ServerCollisionCreatedResponse_Internal.Read(global::Improbable.Worker.Internal.Pbio.GetObject(commandObject, 2)));
+          return 1;
+        }
+        if (global::Improbable.Worker.Internal.Pbio.GetObjectCount(commandObject, 4) != 0) {
+          data.CommandId = 2;
+          data.CommandObject = new Commands.ClientCollisionCreated.Response(global::Improbable.Character.ClientCollisionCreatedResponse_Internal.Read(global::Improbable.Worker.Internal.Pbio.GetObject(commandObject, 4)));
+          return 1;
+        }
         return 0;
       }
     }
@@ -236,11 +394,43 @@ public partial class CollisionsCreated : global::Improbable.Worker.IComponentMet
       }
       else if (handleType == (byte) global::Improbable.Worker.Internal.ComponentProtocol.ClientHandleType.Request)
       {
-        global::Improbable.Worker.Internal.Pbio.AddObject(root, 1009);
+        var data = (global::Improbable.Worker.Internal.GenericCommandObject)
+            global::Improbable.Worker.Internal.ClientHandles.Instance.Dereference(*handle);
+        var commandObject = global::Improbable.Worker.Internal.Pbio.AddObject(root, 1009);
+        if (data.CommandId == 1)
+        {
+          var requestObject = (Commands.ServerCollisionCreated.Request) data.CommandObject;
+          {
+            global::Improbable.Character.ServerCollisionCreatedRequest_Internal.Write(_pool, requestObject.Value, global::Improbable.Worker.Internal.Pbio.AddObject(commandObject, 1));
+          }
+        }
+        if (data.CommandId == 2)
+        {
+          var requestObject = (Commands.ClientCollisionCreated.Request) data.CommandObject;
+          {
+            global::Improbable.Character.ClientCollisionCreatedRequest_Internal.Write(_pool, requestObject.Value, global::Improbable.Worker.Internal.Pbio.AddObject(commandObject, 3));
+          }
+        }
       }
       else if (handleType == (byte) global::Improbable.Worker.Internal.ComponentProtocol.ClientHandleType.Response)
       {
-        global::Improbable.Worker.Internal.Pbio.AddObject(root, 1009);
+        var data = (global::Improbable.Worker.Internal.GenericCommandObject)
+            global::Improbable.Worker.Internal.ClientHandles.Instance.Dereference(*handle);
+        var commandObject = global::Improbable.Worker.Internal.Pbio.AddObject(root, 1009);
+        if (data.CommandId == 1)
+        {
+          var responseObject = (Commands.ServerCollisionCreated.Response) data.CommandObject;
+          {
+            global::Improbable.Character.ServerCollisionCreatedResponse_Internal.Write(_pool, responseObject.Value, global::Improbable.Worker.Internal.Pbio.AddObject(commandObject, 2));
+          }
+        }
+        if (data.CommandId == 2)
+        {
+          var responseObject = (Commands.ClientCollisionCreated.Response) data.CommandObject;
+          {
+            global::Improbable.Character.ClientCollisionCreatedResponse_Internal.Write(_pool, responseObject.Value, global::Improbable.Worker.Internal.Pbio.AddObject(commandObject, 4));
+          }
+        }
       }
     }
     catch (global::System.Exception e)

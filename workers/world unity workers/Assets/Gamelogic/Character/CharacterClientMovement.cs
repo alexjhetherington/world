@@ -15,6 +15,8 @@ public class CharacterClientMovement : SelfClientMovement<CharacterInputs>
     [Require] private PositionSetTimestamp.Reader timestampReader;
     [Require] private LiveTime.Reader liveTimeReader;
 
+    [Require] private CollisionsCreated.Reader collisionsCreatedReader;
+
     private ChatPrep chatPrep;
 
     private void Awake()
@@ -101,6 +103,12 @@ public class CharacterClientMovement : SelfClientMovement<CharacterInputs>
     protected override float GetLiveTime()
     {
         return liveTimeReader.Data.timestamp;
+    }
+
+    protected override NewCollision[] GetNewColliders()
+    {
+        List<NewCollision> newCollisions = collisionsCreatedReader.Data.newCollisions;
+        return newCollisions.ToArray();
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Improbable.Character;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public abstract class OtherClientMovement<MI> : MonoBehaviour where MI : Movemen
     private float smoothTimeScale;
 
     protected abstract AuthoritativeTransform GetAuthoritativeTransform();
+
+    protected abstract NewCollision[] GetNewColliders();
 
     private void Update()
     {
@@ -62,7 +65,7 @@ public abstract class OtherClientMovement<MI> : MonoBehaviour where MI : Movemen
 
             //Debug.Log("Start time: " + startTime + ", End Time: " + endTime + ", relativeTime: " + relativeTime);
 
-            movementCalculation.DoMovement(movementInputsIncludingOld, startTime, endTime);
+            movementCalculation.DoMovement(movementInputsIncludingOld, GetNewColliders(), startTime, endTime);
         }
     }
     

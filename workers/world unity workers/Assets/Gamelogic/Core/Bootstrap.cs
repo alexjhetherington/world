@@ -5,6 +5,7 @@ using Improbable.Unity.Configuration;
 using Improbable.Unity.Core;
 using Improbable.Unity.Core.EntityQueries;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Placed on a GameObject in a Unity scene to execute SpatialOS connection logic on startup.
 namespace Assets.Gamelogic.Core
@@ -25,13 +26,19 @@ namespace Assets.Gamelogic.Core
                 case WorkerPlatform.UnityWorker:
                     Application.targetFrameRate = SimulationSettings.TargetServerFramerate;
                     SpatialOS.OnDisconnected += reason => Application.Quit();
+                    SpatialOS.Connect(gameObject);
                     break;
                 case WorkerPlatform.UnityClient:
                     Application.targetFrameRate = SimulationSettings.TargetClientFramerate;
                     SpatialOS.OnConnected += OnSpatialOsConnectionClient;
+                    SceneManager.LoadScene(BuildSettings.SplashScreenScene, LoadSceneMode.Additive);
                     break;
             }
+        }
 
+        // Called when pressing Connect from the splash screen.
+        public void ConnectToClient()
+        {
             SpatialOS.Connect(gameObject);
         }
 
