@@ -16,17 +16,30 @@ public class TakeCameraAuthority : MonoBehaviour {
     [Require]
     private ClientAuthorityCheck.Writer clientAuthorityCheckWriter;
 
-    private Transform Camera;
+    private FollowTarget followTarget;
 
     public void OnEnable()
     {
-        Camera = FindObjectOfType<Camera>().transform;
-        Camera.SetParent(gameObject.transform);
-        Camera.localPosition = new Vector3(0, 999, 0);
+        //Camera = FindObjectOfType<Camera>().transform;
+        //Camera.SetParent(gameObject.transform);
+        //Camera.localPosition = new Vector3(0, 999, 0);
+
+        StartCoroutine(SetupTarget());
+    }
+
+    IEnumerator SetupTarget()
+    {
+        //Wait a frame so checked out entity can be set to the correct place
+        yield return null;
+
+        Camera cam = FindObjectOfType<Camera>();
+        followTarget = cam.gameObject.GetComponent<FollowTarget>();
+        followTarget.SetTarget(gameObject);
     }
 
     public void OnDisable()
     {
-        Camera.SetParent(null);
+        followTarget.SetTarget(null);
+        //Camera.SetParent(null);
     }
 }
