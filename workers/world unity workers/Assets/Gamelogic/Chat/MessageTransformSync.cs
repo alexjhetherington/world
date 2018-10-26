@@ -20,14 +20,14 @@ public class MessageTransformSync : MonoBehaviour {
         tmpText.text = messageReader.Data.message;
         tmpText.ForceMeshUpdate();
 
-        Walls walls = GetComponentInChildren<Walls>();
-        walls.SizeWalls();
-
         MessageStack stacker = GetComponentInChildren<MessageStack>();
         if (stacker != null)
         {
             stacker.Stack();
         }
+
+        Walls walls = GetComponentInChildren<Walls>();
+        walls.SizeWalls();
 
         AllMessages.GetInstance().AddMessage(gameObject.GetSpatialOsEntity().EntityId.Id, walls.gameObject);
     }

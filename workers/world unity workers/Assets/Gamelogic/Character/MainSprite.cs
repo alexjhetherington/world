@@ -6,6 +6,7 @@ public class MainSprite : MonoBehaviour {
 
     public SpriteRenderer characterSprite;
     public SpriteRenderer spiritSprite;
+    
 
     private void OnEnable()
     {

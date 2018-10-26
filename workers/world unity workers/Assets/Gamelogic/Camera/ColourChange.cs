@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class ColourChange : MonoBehaviour {
 
+    private Camera cam;
+
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+        cam = GetComponent<Camera>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void LateUpdate () {
+        float colourChangeSpeed = 0.05f;
+
+        float xLoop1 = //(transform.position.x * colourChangeSpeed) % 1;
+            Mathf.Cos(transform.position.x * colourChangeSpeed);
+        float zLoop1 = //(transform.position.y * colourChangeSpeed) % 1;
+            Mathf.Cos(transform.position.z * colourChangeSpeed);
+        
+        Color background = new Color(1, xLoop1, zLoop1);
+
+        cam.backgroundColor = background;
 	}
 }

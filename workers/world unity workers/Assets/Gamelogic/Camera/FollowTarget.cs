@@ -14,6 +14,7 @@ public class FollowTarget : MonoBehaviour {
     private void Awake()
     {
         cam = GetComponent<Camera>();
+        HideEverything();
     }
 
     // Use this for initialization
@@ -56,5 +57,23 @@ public class FollowTarget : MonoBehaviour {
     {
         this.target = target;
         CenterCamera();
+        if(target == null)
+        {
+            HideEverything();
+        }
+        else
+        {
+            ShowEverything();
+        }
+    }
+
+    private void HideEverything()
+    {
+        cam.cullingMask = 0;
+    }
+
+    private void ShowEverything()
+    {
+        cam.cullingMask = -1;
     }
 }

@@ -68,6 +68,30 @@ public abstract class OtherClientMovement<MI> : MonoBehaviour where MI : Movemen
             movementCalculation.DoMovement(movementInputsIncludingOld, GetNewColliders(), startTime, endTime);
         }
     }
+
+    public MovementInput GetCurrentInput()
+    {
+        if (last != null)
+        {
+            float startTime = last.timestamp + relativeTime;
+            for(int i = 0; i < movementInputsIncludingOld.Count; i++)
+            {
+                if (i < movementInputsIncludingOld.Count - 1)
+                {
+                    if (movementInputsIncludingOld[i+1].timestamp > startTime)
+                    {
+                        return movementInputsIncludingOld[i];
+                    }
+                }
+                else
+                {
+                    return movementInputsIncludingOld[i];
+                }
+            }
+        }
+
+        return null;
+    }
     
     protected void OnAuthoritativeTransformUpdated(AuthoritativeTransform authoritativeTransform)
     {
