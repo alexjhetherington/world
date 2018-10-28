@@ -15,7 +15,7 @@ public class MessageStack : MonoBehaviour {
 
         if (messageParent.transform.childCount == 1)
         {
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+            transform.position = new Vector3(transform.position.x, -1000, transform.position.z);
         }
         else
         {

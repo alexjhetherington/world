@@ -12,6 +12,7 @@ public class Render : MonoBehaviour {
     private OtherCharacterClientMovement otherCharacterClientMovement = null;
 
     private ChatPrep chatPrep;
+    private ParticleSystem ghostParticles;
 
     [SerializeField] private MeshRenderer normalStill;
     [SerializeField] private MeshRenderer spiritStill;
@@ -31,6 +32,8 @@ public class Render : MonoBehaviour {
         spiritDirection.enabled = false;
 
         chatPrep = GetComponent<ChatPrep>();
+        ghostParticles = GetComponent<ParticleSystem>();
+        ghostParticles.Stop();
     }
 
     private void OnEnable()
@@ -232,5 +235,13 @@ public class Render : MonoBehaviour {
     {
         this.isSpirit = isSpirit;
         EnableAndGetCorrectObject();
+
+        if (!isSpirit)
+        {
+            ghostParticles.Stop();
+        }
+        else{
+            ghostParticles.Play();
+        }
     }
 }

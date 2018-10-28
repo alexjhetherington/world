@@ -67,6 +67,7 @@ public class MessageLayer : MonoBehaviour {
             Debug.LogError("Failed to update all characters with new collision. " + e.StackTrace);
         }
 
+        Debug.LogWarning("Laying message: " + handle.Request.message);
         SpatialOS.Commands.CreateEntity(messageSpawnerWriter, reserve, messageOnGroundTemplate)
         .OnFailure(failure => Debug.LogError("Failed to create message :O" + failure.ErrorMessage)); //TODO
     }

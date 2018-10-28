@@ -50,7 +50,7 @@ public class FollowTarget : MonoBehaviour {
 
     private void CenterCamera()
     {
-        cam.transform.localPosition = new Vector3(0, 999, 0);
+        cam.transform.localPosition = new Vector3(0, 10, 0);
     }
 
     public void SetTarget(GameObject target)

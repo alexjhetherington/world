@@ -111,7 +111,7 @@ public abstract class MovementCalculation<MI> where MI : MovementInput
                     {
                         if (cft.collider.layer != 11)
                         {
-                            Debug.LogWarning("Setting Collider to ghost for movement beginning at: " + ((startStep + j) * stepSize));
+                            if (debug) { Debug.LogWarning("Setting Collider to ghost for movement beginning at: " + ((startStep + j) * stepSize)); }
                             cft.collider.layer = 11;
                         }
                     }
@@ -119,7 +119,7 @@ public abstract class MovementCalculation<MI> where MI : MovementInput
                     {
                         if (cft.collider.layer != 10)
                         {
-                            Debug.LogWarning("Setting Collider to real for movement beginning at: " + ((startStep + j) * stepSize));
+                            if (debug) { Debug.LogWarning("Setting Collider to real for movement beginning at: " + ((startStep + j) * stepSize)); }
                             cft.collider.layer = 10;
                         }
                     }

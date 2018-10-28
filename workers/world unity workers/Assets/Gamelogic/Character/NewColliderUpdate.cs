@@ -31,7 +31,7 @@ public class NewColliderUpdate : MonoBehaviour {
 
     private ClientCollisionCreatedResponse OnClientCollisionCreated(ClientCollisionCreatedRequest request, ICommandCallerInfo callerInfo)
     {
-        Debug.LogWarning("Received CLIENT collision update with id: " + request.newCollision.entityId + ", timestamp: " + request.newCollision.timestamp);
+        //Debug.LogWarning("Received CLIENT collision update with id: " + request.newCollision.entityId + ", timestamp: " + request.newCollision.timestamp);
         Improbable.Collections.List<NewCollision> newCollisions = GetCollisions();
         for(int i = 0; i < newCollisions.Count; i++)
         {
@@ -39,12 +39,8 @@ public class NewColliderUpdate : MonoBehaviour {
             NewCollision nc = newCollisions[i];
             if (nc.entityId == request.newCollision.entityId)
             {
-                Debug.LogWarning(nc.timestamp);
-                Debug.LogWarning(request.newCollision.timestamp);
                 if (nc.timestamp > request.newCollision.timestamp)
                 {
-                    Debug.LogWarning("made it!");
-
                     NewCollision replaceNc = new NewCollision();
                     replaceNc.timestamp = request.newCollision.timestamp;
                     replaceNc.entityId = request.newCollision.entityId;
@@ -64,7 +60,7 @@ public class NewColliderUpdate : MonoBehaviour {
 
     private ServerCollisionCreatedResponse OnServerCollisionCreated(ServerCollisionCreatedRequest request, ICommandCallerInfo callerInfo)
     {
-        Debug.LogWarning("Received SERVER collision update with id: " + request.newCollision.entityId + ", timestamp: " + request.newCollision.timestamp);
+        //Debug.LogWarning("Received SERVER collision update with id: " + request.newCollision.entityId + ", timestamp: " + request.newCollision.timestamp);
         Improbable.Collections.List<NewCollision> newCollisions = GetCollisions();
         newCollisions.Add(request.newCollision);
 
