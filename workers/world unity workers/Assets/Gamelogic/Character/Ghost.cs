@@ -10,10 +10,24 @@ public class Ghost : MonoBehaviour {
 
     [Require] private Position.Reader positionReader;
 
-    public SpriteRenderer directionSprite;
+    public SpriteRenderer ghostSprite;
+
+    void Awake()
+    {
+        ghostSprite.enabled = false;
+    }
 
     private void LateUpdate()
     {
-        directionSprite.gameObject.transform.position = positionReader.Data.coords.ToUnityVector();
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            ghostSprite.enabled = !ghostSprite.enabled;
+        }
+
+        if (ghostSprite.enabled)
+        {
+            ghostSprite.gameObject.transform.position = positionReader.Data.coords.ToUnityVector();
+        }
+        
     }
 }
