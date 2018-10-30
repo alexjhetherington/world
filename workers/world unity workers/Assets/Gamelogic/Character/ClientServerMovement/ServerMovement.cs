@@ -24,24 +24,20 @@ public abstract class ServerMovement<MI> : MonoBehaviour where MI : MovementInpu
     
     protected void OnCharacterControlsUpdated(List<MI> movementInput)
     {
-        /*Debug.LogWarning("---Calculating new authority transform---");
-        foreach(MI mi in movementInput)
-        {
-            Debug.LogWarning(mi.ToString());
-        }*/
-        
         AuthoritativeTransform lastPublishedTransform = GetLastPublishedTransform();
         transform.position = lastPublishedTransform.position;
-
-        //Debug.LogWarning("Last transform: " + lastPublishedTransform.ToString());
-
+        
         MI mostRecent = movementInput[movementInput.Count - 1];
         float simToTime = Mathf.Min(mostRecent.timestamp, GetLiveTime());
         movementCalculation.DoMovement(movementInput, GetNewColliders(), lastPublishedTransform.timestamp, simToTime);
 
         AuthoritativeTransform toPublish = GetAuthoritativeTransform(simToTime);
         PublishAuthoritativeTransform(toPublish);
-        //Debug.LogWarning("New authority transform: " + toPublish);
+    }
+
+    public void ForceUpdate()
+    {
+        OnCharacterControlsUpdated(ReceiveMovementInput());
     }
     
     protected AuthoritativeTransform GetAuthoritativeTransform(float timestamp)

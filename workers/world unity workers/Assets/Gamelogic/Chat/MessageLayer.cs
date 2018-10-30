@@ -17,9 +17,11 @@ using UnityEngine;
 public class MessageLayer : MonoBehaviour {
 
     [Require] private MessageSpawner.Writer messageSpawnerWriter;
+    private CharacterServerMovement serverMovement;
 
     private void OnEnable()
     {
+        serverMovement = GetComponent<CharacterServerMovement>();
         messageSpawnerWriter.CommandReceiver.OnSpawn.RegisterAsyncResponse(ReserveEntityIdForCreateMessage);
     }
 
@@ -34,6 +36,8 @@ public class MessageLayer : MonoBehaviour {
 
     public void CreateMessageOnGround(EntityId reserve, ResponseHandle<MessageSpawner.Commands.Spawn, MessageSpawnRequest, MessageSpawnResponse> handle)
     {
+        serverMovement.ForceUpdate();
+
         var initialPosition = transform.position;
         var messageOnGroundTemplate = EntityTemplateFactory.CreateMessageOnGroundTemplate(initialPosition, handle.Request.message, true);
 
