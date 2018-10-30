@@ -5,8 +5,6 @@ using Improbable.Player;
 using Improbable.Unity;
 using Improbable.Unity.Core;
 using Improbable.Unity.Visualizer;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [WorkerType(WorkerPlatform.UnityWorker)]
@@ -18,7 +16,6 @@ public class HandleClientConnection : MonoBehaviour {
 
     private void OnEnable()
     {
-        //TODO Why is this async??? Didn't seem to cause any errors when i added a response
         ClientConnectionWriter.CommandReceiver.OnDisconnectClient.RegisterAsyncResponse(OnDisconnectClient);
 
         ClientConnectionWriter.CommandReceiver.OnHeartbeat.RegisterResponse(OnHeartbeat);
@@ -37,7 +34,7 @@ public class HandleClientConnection : MonoBehaviour {
                                         ClientDisconnectResponse> handle)
     {
         DeletePlayerEntity();
-        handle.Respond(new ClientDisconnectResponse()); //Response after this entity has ostensibly been deleted seems to cause no issue
+        handle.Respond(new ClientDisconnectResponse());
     }
 
     private void DeletePlayerEntity()

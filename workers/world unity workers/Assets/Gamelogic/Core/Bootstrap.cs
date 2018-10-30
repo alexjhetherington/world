@@ -16,6 +16,7 @@ namespace Assets.Gamelogic.Core
 
         private void Start()
         {
+            Configuration.Debugging.UseInstrumentation = false;
             SpatialOS.ApplyConfiguration(Configuration);
 
             Time.fixedDeltaTime = 1.0f / SimulationSettings.FixedFramerate;
@@ -72,8 +73,7 @@ namespace Assets.Gamelogic.Core
         {
             Debug.LogError("PlayerCreator query failed. SpatialOS workers probably haven't started yet. Try again in a few seconds.");
         }
-
-        // Send a CreatePlayer command to the PLayerCreator entity requesting a Player entity be spawned.
+        
         private static void RequestPlayerCreation(EntityId playerCreatorEntityId)
         {
             SpatialOS.WorkerCommands.SendCommand(PlayerCreation.Commands.CreatePlayer.Descriptor, new CreatePlayerRequest(), playerCreatorEntityId)

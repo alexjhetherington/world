@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//TODO DROPPED AUTHORITATIVE TRANSFORM??? Probably fine actually
-
-//TODO How big should timestep be for simulations
 public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : MovementInput{
     
     protected float timestamp = 0;
@@ -30,7 +27,7 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
         MI movementInput = GetMovementInput();
         UpdateMovementInput(movementInput);
         
-        AuthoritativeTransform at = GetAuthoritativeTransform(); //TODO turn into an event?
+        AuthoritativeTransform at = GetAuthoritativeTransform();
         if ((at != null) && (authoritativeTransform == null || at.timestamp > authoritativeTransform.timestamp))
         {
             simulateFromLast = true;
@@ -98,7 +95,6 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
     {
         if (inputs.Count == 0 || movementInput.IsNew(inputs[inputs.Count - 1]))
         {
-            //Debug.Log("New Input: " + movementInput.ToString());
             inputs.Add(movementInput);
             SendMovementInputToServer(inputs);
         }
@@ -106,7 +102,6 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
 
     protected void SetAuthoritativePosition()
     {
-        //SET POSITION
         transform.position = authoritativeTransform.position;
         transform.rotation = authoritativeTransform.rotation;
     }
@@ -118,8 +113,19 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
         {
             if (inputs[i].timestamp < lastAuthoritativeTimestamp)
             {
-                //If input is below lastAuthoritativeTimestamp, can remove everything below but not including it
-                inputs.RemoveRange(0, i); 
+                string debug = "Received authoritative timestamp: " + lastAuthoritativeTimestamp + ", removing inputs: ";
+                for(int j = 0; j < i; j++)
+                {
+                    debug += inputs[j].ToString() + ", ";
+                }
+                
+
+                //If input is below lastAuthoritativeTimestamp, worst case scenario can remove everything below but not including it
+                inputs.RemoveRange(0, i);
+
+
+                debug += "Next input: " + inputs[0];
+                Debug.Log(debug);
                 break;
             }
         }
@@ -129,18 +135,6 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
     {
         if (simulateFromLast)
         {
-            /*Debug.Log("---Simulating from new received Authority Transform---");
-            Debug.Log("New authority transform: " + authoritativeTransform.ToString());
-
-            Debug.Log("Received at: " + timestamp);
-
-            Dictionary<MI, int> debugSteps = movementCalculation.GetDebugSteps();
-            Debug.Log("Steps taken by client since last authority transform.");
-            foreach (MI key in debugSteps.Keys)
-            {
-                Debug.Log("Input: " + key.ToString() + ", steps: " + debugSteps[key]);
-            } */
-
             Vector3 position = gameObject.transform.position;
             SetAuthoritativePosition();
             movementCalculation.DoMovement(inputs, GetNewColliders(), authoritativeTransform.timestamp, timestamp);
@@ -157,7 +151,6 @@ public abstract class SelfClientMovement<MI> : MonoBehaviour where MI : Movement
             {
                 Debug.LogError("Incorrect client movement. Distance: " + distance + ", timestamp: " + timestamp);
             }
-            //movementCalculation.ResetDebugSteps();
         }
 
 

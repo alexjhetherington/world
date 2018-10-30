@@ -4,12 +4,8 @@ using Improbable.Entity.Component;
 using Improbable.Unity;
 using Improbable.Unity.Core;
 using Improbable.Unity.Visualizer;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-//TODO what causes errors?????
 [WorkerType(WorkerPlatform.UnityWorker)]
 public class PlayerCreatingBehaviour : MonoBehaviour {
 

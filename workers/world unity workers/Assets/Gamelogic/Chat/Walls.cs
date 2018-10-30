@@ -9,24 +9,24 @@ public class Walls : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     private BoxCollider boxCollider;
 
-    //TODO factor out extra size properly
+    [SerializeField] private float wallExtraSize = 0.64f;
+    
     public void SizeWalls()
     {
-        //Debug.Log(text.bounds.max - text.bounds.min);
         Vector3 size = text.bounds.max - text.bounds.min;
 
         if(spriteRenderer == null)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
-        spriteRenderer.size = new Vector2(size.x + 0.64f, size.y + 0.64f);
+        spriteRenderer.size = new Vector2(size.x + wallExtraSize, size.y + wallExtraSize);
 
         if(boxCollider == null)
         {
             boxCollider = GetComponent<BoxCollider>();
         }
 
-        boxCollider.size = new Vector3(size.x + 0.64f, size.y + 0.64f, 1);
+        boxCollider.size = new Vector3(size.x + wallExtraSize, size.y + wallExtraSize, 1);
         boxCollider.center = new Vector3(0, 0, transform.position.y);
     }
 }

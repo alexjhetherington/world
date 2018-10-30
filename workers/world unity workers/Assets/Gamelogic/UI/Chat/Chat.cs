@@ -1,6 +1,4 @@
 ﻿using Prime31.MessageKit;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,16 +7,8 @@ public class Chat : MonoBehaviour {
 
     public TMP_InputField inputField;
 
-    //private EventSystem eventSystem;
-
     private const string CONTROL_NAME = "chatBox";
-
-    private void Awake()
-    {
-        //eventSystem = FindObjectOfType<EventSystem>();
-    }
-
-    // Use this for initialization
+    
     void Start () {
         MessageKit<bool>.addObserver(MessageKitIds.TYPING_STATE, EnableDisableChat);
 	}

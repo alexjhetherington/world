@@ -1,14 +1,11 @@
-﻿using Improbable.Character;
+﻿using Assets.Gamelogic.Core;
+using Improbable.Character;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class OtherClientMovement<MI> : MonoBehaviour where MI : MovementInput
 {
-    //Delays character from displaying by this length of time.
-    //Higher values will prevent weird behaviour around keyframes when latency is unstable
-    protected float delay = 0.4f;
-
     private List<MI> movementInputsIncludingOld = new List<MI>();
 
     protected MovementCalculation<MI> movementCalculation;
@@ -26,13 +23,10 @@ public abstract class OtherClientMovement<MI> : MonoBehaviour where MI : Movemen
 
     private void Update()
     {
-        //TODO kind of copied code
         AuthoritativeTransform at = GetAuthoritativeTransform(); //TODO turn into an event?
         if ((at != null) && (prep == null || at.timestamp > prep.timestamp))
         {
-            prep = at;
-            //Debug.Log("Prepping: " + at.ToString());
-            
+            prep = at;           
 
             //If there is no variance in updating time, this will be equal to delay
             //If it's smaller, we need to increase the pace of the simulation
@@ -41,15 +35,13 @@ public abstract class OtherClientMovement<MI> : MonoBehaviour where MI : Movemen
 
             if (timeDifference <= 0)
             {
-                //Debug.Log("Relative time already past new transform, setting new transform. Will jump backwards in time");
                 SetLast(at);
                 smoothTimeScale = 1;
             }
             else
             {
-                StartCoroutine(SetLastAfterDelay(at, delay));
-                //Debug.Log("Time Difference: " + timeDifference + ", delay: " + delay);
-                smoothTimeScale = delay / timeDifference;
+                StartCoroutine(SetLastAfterDelay(at, SimulationSettings.otherClientDelay));
+                smoothTimeScale = SimulationSettings.otherClientDelay / timeDifference;
             }
         }
 
@@ -62,8 +54,7 @@ public abstract class OtherClientMovement<MI> : MonoBehaviour where MI : Movemen
             
             relativeTime = relativeTime + stepAmount;
             float endTime = last.timestamp + relativeTime;
-
-            //Debug.Log("Start time: " + startTime + ", End Time: " + endTime + ", relativeTime: " + relativeTime);
+            
 
             movementCalculation.DoMovement(movementInputsIncludingOld, GetNewColliders(), startTime, endTime);
         }
@@ -95,12 +86,11 @@ public abstract class OtherClientMovement<MI> : MonoBehaviour where MI : Movemen
     
     protected void OnAuthoritativeTransformUpdated(AuthoritativeTransform authoritativeTransform)
     {
-        StartCoroutine(SetLastAfterDelay(authoritativeTransform, delay));
+        StartCoroutine(SetLastAfterDelay(authoritativeTransform, SimulationSettings.otherClientDelay));
     }
 
     protected IEnumerator SetLastAfterDelay(AuthoritativeTransform authoritativeTransform, float delayTime)
     {
-        //Debug.Log("Prepping new AT after delay 2 : " + authoritativeTransform.ToString());
         yield return new WaitForSeconds(delayTime);
         SetLast(authoritativeTransform);
     }
@@ -149,7 +139,7 @@ public abstract class OtherClientMovement<MI> : MonoBehaviour where MI : Movemen
                 if (last != null)
                 {
                     float timestamp = newInputs[0].timestamp;
-                    float clientPresentTime = (last.timestamp + relativeTime) - delay;
+                    float clientPresentTime = (last.timestamp + relativeTime) - SimulationSettings.otherClientDelay;
                     if (timestamp < clientPresentTime)
                     {
                         Debug.Log("Inputs arriving late. Will skip forward somtimes.");
@@ -170,7 +160,6 @@ public abstract class OtherClientMovement<MI> : MonoBehaviour where MI : Movemen
         {
             if (movementInputsIncludingOld[i].timestamp < timestamp)
             {
-                //Debug.Log("Removing from before: " + timestamp);
                 movementInputsIncludingOld.RemoveRange(0, i);
                 break;
             }

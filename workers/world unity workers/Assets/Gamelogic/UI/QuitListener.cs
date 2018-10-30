@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuitListener : MonoBehaviour {	
-	// Update is called once per frame
+public class QuitListener : MonoBehaviour {
 	void Update () {
         if (Input.GetKey(KeyCode.Escape))
         {

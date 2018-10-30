@@ -32,11 +32,8 @@ public class MoveCalc : MovementCalculation<CharacterInputs> {
         Collider[] overlapping = Physics.OverlapSphere(new Vector3(characterController.transform.position.x, 0, characterController.transform.position.z), characterController.radius, mask);
         if (overlapping.Length > 0)
         {
-            //Debug.Log("Overlapping: " + overlapping.Length);
             characterController.gameObject.layer = 11;
         }
-
-        //Vector3 startPosition = characterController.gameObject.transform.transform.position;
 
         var horizontalAxis = movementInput.horizontalAxis;
         var verticalAxis = movementInput.verticalAxis;
@@ -55,17 +52,8 @@ public class MoveCalc : MovementCalculation<CharacterInputs> {
         {
             vector = direction * deltaTime * spiritSpeed;
         }
-        //Debug.Log(vector.magnitude);
 
-        characterController.Move(new Vector3(vector.x, 0, vector.y)); //TODO this is appropriate for server side movement?
-
-        //Vector3 endPosition = characterController.gameObject.transform.transform.position;
-
-        /*float distance = (endPosition - startPosition).magnitude;
-        Debug.Log("Distance: " + distance);
-        float timeMoved = deltaTime;
-        Debug.Log("Simulated time: " + deltaTime);
-        Debug.Log("Simulated speed: " + distance / timeMoved);*/
+        characterController.Move(new Vector3(vector.x, 0, vector.y));
     }
 
     public override bool IsStill()

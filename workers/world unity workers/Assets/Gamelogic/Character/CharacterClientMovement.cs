@@ -39,22 +39,6 @@ public class CharacterClientMovement : SelfClientMovement<CharacterInputs>
 
     protected override void SendMovementInputToServer(List<CharacterInputs> movementInput)
     {
-        /*List<CharacterInputs> cloneList = new List<CharacterInputs>();
-        foreach(CharacterInputs charIn in movementInput)
-        {
-            cloneList.Add(charIn);
-        }
-        FakeLatency(cloneList);*/
-        ActuallySendToServer(movementInput);
-    }
-
-    private void ActuallySendToServer(List<CharacterInputs> movementInput)
-    {
-        /*Debug.Log("This input package is");
-        foreach (CharacterInputs debugInput in movementInput){
-            Debug.Log(debugInput.ToString());
-        }*/
-
         Improbable.Collections.List<CharacterControlsUpdate> characterControls = new Improbable.Collections.List<CharacterControlsUpdate>();
         for (int i = 0; i < movementInput.Count; i++)
         {
@@ -80,26 +64,6 @@ public class CharacterClientMovement : SelfClientMovement<CharacterInputs>
         return at;
     }
 
-    private new void Update()
-    {
-        /*latencyArray.Tick(Time.deltaTime);
-        List<CharacterInputs> delayed = latencyArray.GetFirstIfTimedOut();
-        if (delayed != null)
-        {
-            ActuallySendToServer(delayed);
-        }*/
-
-        base.Update();
-    }
-
-
-    /*private TimedArray<List<CharacterInputs>> latencyArray = new TimedArray<List<CharacterInputs>>();
-    private float latency = 1;
-    private void FakeLatency(List<CharacterInputs> movementInput)
-    {
-        latencyArray.Insert(latency, movementInput);
-    }*/
-
     protected override float GetLiveTime()
     {
         return liveTimeReader.Data.timestamp;
@@ -109,58 +73,5 @@ public class CharacterClientMovement : SelfClientMovement<CharacterInputs>
     {
         List<NewCollision> newCollisions = collisionsCreatedReader.Data.newCollisions;
         return newCollisions.ToArray();
-    }
-}
-
-
-
-public class TimedArray<T>
-{
-    private List<TimedItem<T>> _timedArray = new List<TimedItem<T>>();
-
-    public void Insert(float time, T item)
-    {
-        _timedArray.Add(new TimedItem<T>(time, item));
-    }
-
-    public void Tick(float deltaTime)
-    {
-        for (int i = _timedArray.Count - 1; i >= 0; i--)
-        {
-            TimedItem<T> currentItem = _timedArray[i];
-            float newTime = currentItem.timeLeft - deltaTime;
-            if (newTime > 0)
-            {
-                _timedArray[i] = new TimedItem<T>(newTime, currentItem.item);
-            }
-            else
-            {
-                _timedArray[i] = new TimedItem<T>(0, currentItem.item);
-            }
-
-        }
-    }
-
-    public T GetFirstIfTimedOut()
-    {
-        if (_timedArray.Count > 0 && _timedArray[0].timeLeft <= 0)
-        {
-            T item = _timedArray[0].item;
-            _timedArray.RemoveAt(0);
-            return item;
-        }
-        return default(T);
-    }
-}
-
-public class TimedItem<T>
-{
-    public float timeLeft;
-    public T item;
-
-    public TimedItem(float timeLeft, T item)
-    {
-        this.timeLeft = timeLeft;
-        this.item = item;
     }
 }

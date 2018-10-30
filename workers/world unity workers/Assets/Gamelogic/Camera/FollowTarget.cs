@@ -16,11 +16,6 @@ public class FollowTarget : MonoBehaviour {
         cam = GetComponent<Camera>();
         HideEverything();
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void LateUpdate () {

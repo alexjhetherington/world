@@ -1,8 +1,6 @@
 ﻿
 using Improbable;
 using Improbable.Character;
-using Improbable.Unity.Core;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

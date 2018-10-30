@@ -15,9 +15,9 @@ public class ColourChange : MonoBehaviour {
 	void LateUpdate () {
         float colourChangeSpeed = 0.05f;
 
-        float xLoop1 = //(transform.position.x * colourChangeSpeed) % 1;
+        float xLoop1 =
             Mathf.Cos(transform.position.x * colourChangeSpeed);
-        float zLoop1 = //(transform.position.y * colourChangeSpeed) % 1;
+        float zLoop1 =
             Mathf.Cos(transform.position.z * colourChangeSpeed);
         
         Color background = new Color(1, xLoop1, zLoop1);

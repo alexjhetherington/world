@@ -25,7 +25,6 @@ public class OtherCharacterClientMovement : OtherClientMovement<CharacterInputs>
     private void OnEnable()
     {
         characterControlsReader.ComponentUpdated.Add(OnCharacterControlsUpdated);
-        //timestampReader.ComponentUpdated.Add(OnPositionTimestampUpdated);
         
         if (characterControlsReader.Authority == Improbable.Worker.Authority.Authoritative)
         {
@@ -37,13 +36,13 @@ public class OtherCharacterClientMovement : OtherClientMovement<CharacterInputs>
         else
         {
             //Other clients are rendered slightly in the past. We keep old inputs from them to enable this.
-            //When we first join we may have already lost some inputs - so to start with we assume they don't move.
+            //When another client is enabled, old inputs might have already been discarded. In this scenario
+            //We assume the old inputs are no movement
             List<CharacterInputs> fakeInputs = new List<CharacterInputs>();
             fakeInputs.Add(new CharacterInputs(0, 0, 0, false));
             UpdateMovementInputs(fakeInputs);
 
             UpdateMovementInputs(ReceiveMovementInput());
-            //SetLastAfterDelay(GetAuthoritativeTransform(), delay);
             AuthoritativeTransform at = GetAuthoritativeTransform();
             SetLast(at);
             prep = at;
@@ -53,13 +52,7 @@ public class OtherCharacterClientMovement : OtherClientMovement<CharacterInputs>
     private void OnDisable()
     {
         characterControlsReader.ComponentUpdated.Remove(OnCharacterControlsUpdated);
-        //timestampReader.ComponentUpdated.Remove(OnPositionTimestampUpdated);
     }
-
-    //private void OnPositionTimestampUpdated(PositionSetTimestamp.Update obj)
-    //{
-    //    OnAuthoritativeTransformUpdated(GetAuthoritativeTransform());
-    //}
 
     private void OnCharacterControlsUpdated(CharacterControls.Update obj)
     {

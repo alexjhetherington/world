@@ -1,4 +1,5 @@
-﻿using Improbable;
+﻿using Assets.Gamelogic.Core;
+using Improbable;
 using Improbable.Character;
 using Improbable.Core;
 using Improbable.Entity.Component;
@@ -16,7 +17,6 @@ using UnityEngine;
 public class MessageLayer : MonoBehaviour {
 
     [Require] private MessageSpawner.Writer messageSpawnerWriter;
-    //[Require] private Position.Writer positionWriter;
 
     private void OnEnable()
     {
@@ -32,18 +32,13 @@ public class MessageLayer : MonoBehaviour {
         handle.Respond(new MessageSpawnResponse());
     }
 
-    /*public void Wait(EntityId reserve, ResponseHandle<MessageSpawner.Commands.Spawn, MessageSpawnRequest, MessageSpawnResponse> handle)
-    {
-        StartCoroutine(CreateMessageOnGround(reserve, handle));
-    }*/
-
     public void CreateMessageOnGround(EntityId reserve, ResponseHandle<MessageSpawner.Commands.Spawn, MessageSpawnRequest, MessageSpawnResponse> handle)
     {
         var initialPosition = transform.position;
         var messageOnGroundTemplate = EntityTemplateFactory.CreateMessageOnGroundTemplate(initialPosition, handle.Request.message, true);
 
-        //Find all nearby characters and add the default collision time (now + 3 seconds
-        //The client will report their collision time when they get the update, which may update this collision time)
+        //Notify all nearby characters that there is a new collison
+        //See SimulationSettings.defaultMessageGhostTime
         try
         {
             GameObject[] characters = GameObject.FindGameObjectsWithTag("Character");
@@ -53,7 +48,7 @@ public class MessageLayer : MonoBehaviour {
 
                 NewCollision newCollision = new NewCollision();
                 float currentTimestamp = SpatialOS.GetLocalEntityComponent<LiveTime>(entity.EntityId).Get().Value.timestamp;
-                newCollision.timestamp = currentTimestamp + 3; //TODO extract
+                newCollision.timestamp = currentTimestamp + SimulationSettings.defaultMessageGhostTime;
                 newCollision.entityId = reserve.Id;
 
                 SpatialOS.Commands

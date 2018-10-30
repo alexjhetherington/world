@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-//Yes this is dirty :(
 public class IWantFocus : MonoBehaviour {
     
 	void Update () {

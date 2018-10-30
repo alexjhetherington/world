@@ -8,8 +8,7 @@
         },
         "UnityClient": {
             "Targets": [
-                "StandaloneWindows",
-                "StandaloneOSX"
+                "StandaloneWindows"
             ],
             "Assets": "Streaming"
         }
