@@ -11,6 +11,8 @@
 [Bb]uild/
 Assets/AssetStoreTools*
 
+.spatialos/
+
 ProBuilder Data/
 
 # Visual Studio cache directory
