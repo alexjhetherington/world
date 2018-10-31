@@ -967,6 +967,11 @@ Prefab:
       propertyPath: far clip plane
       value: 1100
       objectReference: {fileID: 0}
+    - target: {fileID: 114147697452667628, guid: 6fde06ac1096bba43b75d212c7a88d84,
+        type: 2}
+      propertyPath: stopNaNPropagation
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fde06ac1096bba43b75d212c7a88d84, type: 2}
   m_IsPrefabAsset: 0
@@ -1072,6 +1077,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f850566169166ce4ba47ea21cbe89baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1434824267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1434824264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b74b4f3e000a84aa1f009bc9cba360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
 --- !u!1 &1649274370
 GameObject:
   m_ObjectHideFlags: 0
